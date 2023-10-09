@@ -45,7 +45,7 @@ public class BomberoData {
             ps.setInt(3, bombero.getCodBrigada().getCodBrigada());
             ps.setInt(4, bombero.getDni());
             ps.setInt(5,bombero.getCelular());
-            ps.setBoolean(5, bombero.isEstado());
+            ps.setBoolean(6, bombero.isEstado());
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
@@ -57,7 +57,7 @@ public class BomberoData {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero"+ex);
         }
     
     
@@ -177,6 +177,7 @@ public class BomberoData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero "+ex);
         }
 
+        
         return bomberos;
     }   
 }

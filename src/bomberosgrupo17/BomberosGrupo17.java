@@ -39,17 +39,17 @@ public class BomberosGrupo17 {
 //    Materia mate=md.buscarMateria(4);
 //    Inscripcion insc=new Inscripcion(cornejo, mate, 7);
          
-  Cuartel cuartel= new Cuartel("cuartelNumero3","San martin 6666",3,4,7777777,"correo3");    
+ // Cuartel cuartel= new Cuartel("cuartelNumero4","9  de julio 1019",5,9,888888,"correo4");    
   CuartelData cuartelData= new CuartelData();
- //cuartelData.guardarCuartel(cuartel);
-  Brigada cola=new Brigada("uuuu","mofuego",true,cuartel);
+// cuartelData.guardarCuartel(cuartel);
+ // Brigada brigada1=new Brigada("netbean","operativos de prevención",true,cuartel);
  //Brigada santafe=new Brigada("qqqq","masfuego",true,cuartel);
 BrigadaData bd =new BrigadaData();
-//bd.guardarBrigada(cola);
+Brigada brigada1= bd.buscarBrigada(1);
 //bd.guardarBrigada(santafe);
-Bombero bom = new Bombero(2,"Esteban Cornejo",LocalDate.of(1980,04,20),12454,cola,true);
+Bombero bom1 = new Bombero(12,"maria paz ",LocalDate.of(1990,06,11),99999,brigada1,true);
   BomberoData databom=new BomberoData();
-  //databom.guardarBombero(bom);
+  databom.guardarBombero(bom1);
   // databom.modificarBombero(bom);
   //databom.eliminarBombero(5);
 //        Bombero bomberoEncontrado= databom.buscarBombero(5);
@@ -57,9 +57,9 @@ Bombero bom = new Bombero(2,"Esteban Cornejo",LocalDate.of(1980,04,20),12454,col
 //      System.out.println("nombre_ape"+bomberoEncontrado.getNombreApe());
 //      System.out.println(bomberoEncontrado.toString());
 //       
-//Siniestro siniestro1=new Siniestro(") incendios en viviendas", LocalDate.of(1980,04,20), 2, 3, "se que el rancho", LocalDate.of(2023,10,5), 8, santafe);
-    SiniestroData siniestrodata = new SiniestroData();
-//    siniestrodata.guardarSiniestro(siniestro1);
+//Siniestro siniestro2=new Siniestro(") incendios", LocalDate.of(2023,10,04), 2, 3, "incedio de casa 2 pisos", LocalDate.of(2023,10,5), 8, brigada1);
+//    SiniestroData siniestrodata = new SiniestroData();
+//    siniestrodata.guardarSiniestro(siniestro2);
 
  
 //      ArrayList<Brigada> list= bd.listarBrigadas();
@@ -67,10 +67,10 @@ Bombero bom = new Bombero(2,"Esteban Cornejo",LocalDate.of(1980,04,20),12454,col
 //          System.out.println(brigada.toString());
 //           } 
       
-          ArrayList<Bombero> list= databom.listarBomberos();
-           for (Bombero bombero : list) {
-          System.out.println(bombero.toString());
-           } 
+//          ArrayList<Bombero> list= databom.listarBomberos();
+//           for (Bombero bombero : list) {
+//          System.out.println(bombero.toString());
+//           } 
 //            Brigada list= bd.buscarBrigadaPorEspecialidad("fuego");
 //           
 //          System.out.println(list.getNombreBr()+" "+list.getEspecialidad()+" "+list.isLibre());
