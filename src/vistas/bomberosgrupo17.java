@@ -59,6 +59,11 @@ public class bomberosgrupo17 extends javax.swing.JFrame {
 
         jbBombero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/brigada1 - copia.jpeg"))); // NOI18N
         jbBombero.setText("Bombero");
+        jbBombero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBomberoActionPerformed(evt);
+            }
+        });
 
         jbSiniestro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/siniestroIcono.png"))); // NOI18N
         jbSiniestro.setText("Siniestro");
@@ -149,6 +154,10 @@ public class bomberosgrupo17 extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbBomberoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBomberoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbBomberoActionPerformed
 
     /**
      * @param args the command line arguments
