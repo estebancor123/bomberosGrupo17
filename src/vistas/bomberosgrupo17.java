@@ -31,7 +31,7 @@ public class bomberosgrupo17 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImageIcon icono = new ImageIcon(getClass().getResource("/imagenes/fondoalternativo.gif"));
+        ImageIcon icono = new ImageIcon(getClass().getResource("/imagenes/siniestro1.jpg"));
         Image gen= icono.getImage();
         escritorio = new javax.swing.JDesktopPane(){
             public void paintComponent(Graphics g){

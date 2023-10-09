@@ -96,7 +96,7 @@
     <Container class="javax.swing.JDesktopPane" name="escritorio">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JDesktopPane(){&#xa;    public void paintComponent(Graphics g){&#xa;        g.drawImage(gen,0,0,getWidth(),getHeight(),this);&#xa;&#xa;    }&#xa;}&#xa;"/>
-        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon icono = new ImageIcon(getClass().getResource(&quot;/imagenes/fondoalternativo.gif&quot;));&#xa;Image gen= icono.getImage();"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon icono = new ImageIcon(getClass().getResource(&quot;/imagenes/siniestro1.jpg&quot;));&#xa;Image gen= icono.getImage();"/>
       </AuxValues>
 
       <Layout>
