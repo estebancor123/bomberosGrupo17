@@ -77,6 +77,11 @@ public class bomberosgrupo17 extends javax.swing.JFrame {
 
         jbCuartel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cuartelIcono.png"))); // NOI18N
         jbCuartel.setText("Cuartel");
+        jbCuartel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCuartelActionPerformed(evt);
+            }
+        });
 
         jbMenu.setText("menu");
         jbMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -164,9 +169,13 @@ public class bomberosgrupo17 extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
             .addGroup(layout.createSequentialGroup()
                 .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+=======
+            .addComponent(escritorio)
+>>>>>>> ebaae9f8d21ce25931348df8fc6109a2f721363a
         );
 
         pack();
@@ -180,6 +189,7 @@ public class bomberosgrupo17 extends javax.swing.JFrame {
         escritorio.moveToFront(bom);
     }//GEN-LAST:event_jbBomberoActionPerformed
 
+<<<<<<< HEAD
     private void jbMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMenuActionPerformed
 //        escritorio.repaint();
 //        menu bom=new menu();
@@ -187,6 +197,16 @@ public class bomberosgrupo17 extends javax.swing.JFrame {
 //        escritorio.add(bom);
 //        escritorio.moveToFront(bom);
     }//GEN-LAST:event_jbMenuActionPerformed
+=======
+    private void jbCuartelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCuartelActionPerformed
+        // TODO add your handling code here:
+        escritorio.repaint();
+        cuartelview cuartel=new cuartelview();
+        cuartel.setVisible(true);
+        escritorio.add(cuartel);
+        escritorio.moveToFront(cuartel);
+    }//GEN-LAST:event_jbCuartelActionPerformed
+>>>>>>> ebaae9f8d21ce25931348df8fc6109a2f721363a
 
     /**
      * @param args the command line arguments

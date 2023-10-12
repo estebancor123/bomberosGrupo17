@@ -88,10 +88,14 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
           <Group type="102" alignment="0" attributes="0">
               <Component id="escritorio" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
+=======
+          <Component id="escritorio" alignment="0" max="32767" attributes="0"/>
+>>>>>>> ebaae9f8d21ce25931348df8fc6109a2f721363a
       </Group>
     </DimensionLayout>
   </Layout>
@@ -176,6 +180,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Cuartel"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCuartelActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jbMenu">
           <Properties>

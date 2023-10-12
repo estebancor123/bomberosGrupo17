@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/pc2/Documents/NetBeansProjects/bomberosGrupo17/src/acceso/a/datos/CuartelData.java</file>
             <file>file:/C:/Users/pc2/Documents/NetBeansProjects/bomberosGrupo17/src/entidades/Cuartel.java</file>
             <file>file:/C:/Users/pc2/Documents/NetBeansProjects/bomberosGrupo17/src/entidades/Bombero.java</file>
@@ -16,6 +17,12 @@
             <file>file:/C:/Users/pc2/Documents/NetBeansProjects/bomberosGrupo17/src/entidades/Siniestro.java</file>
             <file>file:/C:/Users/pc2/Documents/NetBeansProjects/bomberosGrupo17/src/imagenes/brigada1.jpeg</file>
             <file>file:/C:/Users/pc2/Documents/NetBeansProjects/bomberosGrupo17/src/acceso/a/datos/BrigadaData.java</file>
+=======
+            <file>file:/C:/Users/Usuario/Desktop/Proyecto%20Final/bomberosGrupo17/src/vistas/cuartelview.java</file>
+            <file>file:/C:/Users/Usuario/Desktop/Proyecto%20Final/bomberosGrupo17/src/vistas/brigadaview.java</file>
+            <file>file:/C:/Users/Usuario/Desktop/Proyecto%20Final/bomberosGrupo17/src/vistas/siniestro.java</file>
+            <file>file:/C:/Users/Usuario/Desktop/Proyecto%20Final/bomberosGrupo17/src/vistas/bomberosgrupo17.java</file>
+>>>>>>> ebaae9f8d21ce25931348df8fc6109a2f721363a
         </group>
     </open-files>
 </project-private>
