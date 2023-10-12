@@ -47,7 +47,8 @@ public class BomberosGrupo17 {
 BrigadaData bd =new BrigadaData();
 Brigada brigada1= bd.buscarBrigada(1);
 //bd.guardarBrigada(santafe);
-Bombero bom1 = new Bombero(12,"maria paz ",LocalDate.of(1990,06,11),99999,brigada1,true);
+//('12','pepe','10/10/200','1','8888','789456123','true','argento','a+')
+Bombero bom1 = new Bombero(12,"Cordoba",LocalDate.of(1980, 04, 25),brigada1,7777,5555,true,"Martinez","a+");
   BomberoData databom=new BomberoData();
   databom.guardarBombero(bom1);
   // databom.modificarBombero(bom);

@@ -83,12 +83,15 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="escritorio" min="-2" pref="839" max="-2" attributes="0"/>
+          <Component id="escritorio" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="escritorio" alignment="0" pref="560" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="escritorio" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -110,6 +113,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jbMenu" min="-2" max="-2" attributes="0"/>
                       <Component id="jbCuartel" min="-2" pref="179" max="-2" attributes="0"/>
                       <Component id="jbBrigada" min="-2" pref="179" max="-2" attributes="0"/>
                   </Group>
@@ -120,12 +124,14 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <Component id="jbMenu" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jbBombero" alignment="3" min="-2" pref="146" max="-2" attributes="0"/>
                       <Component id="jbBrigada" alignment="3" min="-2" pref="146" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="131" max="32767" attributes="0"/>
+                  <EmptySpace pref="236" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jbSiniestro" alignment="3" min="-2" pref="146" max="-2" attributes="0"/>
                       <Component id="jbCuartel" alignment="3" min="-2" pref="146" max="-2" attributes="0"/>
@@ -139,7 +145,7 @@
         <Component class="javax.swing.JButton" name="jbBombero">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagenes/brigada1 - copia.jpeg"/>
+              <Image iconType="3" name="/imagenes/brigada1.jpeg"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Bombero"/>
           </Properties>
@@ -170,6 +176,14 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Cuartel"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jbMenu">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="menu"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbMenuActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

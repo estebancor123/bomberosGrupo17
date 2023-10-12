@@ -5,6 +5,7 @@
  */
 package vistas;
 
+
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -20,6 +21,8 @@ public class bomberosgrupo17 extends javax.swing.JFrame {
      */
     public bomberosgrupo17() {
         initComponents();
+        
+        
     }
 
     /**
@@ -44,6 +47,7 @@ public class bomberosgrupo17 extends javax.swing.JFrame {
         jbSiniestro = new javax.swing.JButton();
         jbBrigada = new javax.swing.JButton();
         jbCuartel = new javax.swing.JButton();
+        jbMenu = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -57,7 +61,7 @@ public class bomberosgrupo17 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jbBombero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/brigada1 - copia.jpeg"))); // NOI18N
+        jbBombero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/brigada1.jpeg"))); // NOI18N
         jbBombero.setText("Bombero");
         jbBombero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,10 +78,18 @@ public class bomberosgrupo17 extends javax.swing.JFrame {
         jbCuartel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cuartelIcono.png"))); // NOI18N
         jbCuartel.setText("Cuartel");
 
+        jbMenu.setText("menu");
+        jbMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbMenuActionPerformed(evt);
+            }
+        });
+
         escritorio.setLayer(jbBombero, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jbSiniestro, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jbBrigada, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jbCuartel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(jbMenu, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
@@ -90,6 +102,7 @@ public class bomberosgrupo17 extends javax.swing.JFrame {
                     .addComponent(jbBombero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(136, 136, 136)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbMenu)
                     .addComponent(jbCuartel, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbBrigada, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(191, 191, 191))
@@ -97,11 +110,13 @@ public class bomberosgrupo17 extends javax.swing.JFrame {
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
-                .addGap(76, 76, 76)
+                .addGap(27, 27, 27)
+                .addComponent(jbMenu)
+                .addGap(26, 26, 26)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbBombero, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbBrigada, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbCuartel, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -145,19 +160,33 @@ public class bomberosgrupo17 extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, 839, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBomberoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBomberoActionPerformed
-        // TODO add your handling code here:
+        escritorio.repaint();
+        bomberoview bom=new bomberoview();
+        bom.setVisible(true);
+        escritorio.add(bom);
+        escritorio.moveToFront(bom);
     }//GEN-LAST:event_jbBomberoActionPerformed
+
+    private void jbMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMenuActionPerformed
+//        escritorio.repaint();
+//        menu bom=new menu();
+//        bom.setVisible(true);
+//        escritorio.add(bom);
+//        escritorio.moveToFront(bom);
+    }//GEN-LAST:event_jbMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,6 +238,8 @@ public class bomberosgrupo17 extends javax.swing.JFrame {
     private javax.swing.JButton jbBombero;
     private javax.swing.JButton jbBrigada;
     private javax.swing.JButton jbCuartel;
+    private javax.swing.JButton jbMenu;
     private javax.swing.JButton jbSiniestro;
     // End of variables declaration//GEN-END:variables
+
 }

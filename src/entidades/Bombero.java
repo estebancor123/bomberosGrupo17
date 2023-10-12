@@ -13,36 +13,40 @@ import java.time.LocalDate;
  */
 public class Bombero {
     private int idBombero;
-    private int dni; 
-    private String nombreApe;
+    private String nombre;
     private LocalDate fechaNac;
-    private int celular;
     private Brigada codBrigada;
+    private int dni; 
+    private int celular;
     private boolean estado;
-    
+    private String apellido;
+    private String grupoSanguineo;
+
     public Bombero() {
     }
 
-    public Bombero(int idBombero, int dni, String nombreApe, LocalDate fechaNac, int celular, Brigada codBrigada,boolean estado) {
+    public Bombero(int idBombero, String nombre, LocalDate fechaNac, Brigada codBrigada, int dni, int celular, boolean estado, String apellido, String grupoSanguineo) {
         this.idBombero = idBombero;
-        this.dni = dni;
-        this.nombreApe = nombreApe;
+        this.nombre = nombre;
         this.fechaNac = fechaNac;
-        this.celular = celular;
         this.codBrigada = codBrigada;
+        this.dni = dni;
+        this.celular = celular;
         this.estado = estado;
+        this.apellido = apellido;
+        this.grupoSanguineo = grupoSanguineo;
     }
 
-    public Bombero(int dni, String nombreApe, LocalDate fechaNac, int celular, Brigada codBrigada,boolean estado) {
-        this.dni = dni;
-        this.nombreApe = nombreApe;
+    public Bombero(String nombre, LocalDate fechaNac, Brigada codBrigada, int dni, int celular, boolean estado, String apellido, String grupoSanguineo) {
+        this.nombre = nombre;
         this.fechaNac = fechaNac;
-        this.celular = celular;
         this.codBrigada = codBrigada;
+        this.dni = dni;
+        this.celular = celular;
         this.estado = estado;
+        this.apellido = apellido;
+        this.grupoSanguineo = grupoSanguineo;
     }
-
-  
 
     public int getIdBombero() {
         return idBombero;
@@ -52,20 +56,12 @@ public class Bombero {
         this.idBombero = idBombero;
     }
 
-    public int getDni() {
-        return dni;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setDni(int dni) {
-        this.dni = dni;
-    }
-
-    public String getNombreApe() {
-        return nombreApe;
-    }
-
-    public void setNombreApe(String nombreApe) {
-        this.nombreApe = nombreApe;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public LocalDate getFechaNac() {
@@ -76,6 +72,22 @@ public class Bombero {
         this.fechaNac = fechaNac;
     }
 
+    public Brigada getCodBrigada() {
+        return codBrigada;
+    }
+
+    public void setCodBrigada(Brigada codBrigada) {
+        this.codBrigada = codBrigada;
+    }
+
+    public int getDni() {
+        return dni;
+    }
+
+    public void setDni(int dni) {
+        this.dni = dni;
+    }
+
     public int getCelular() {
         return celular;
     }
@@ -84,14 +96,7 @@ public class Bombero {
         this.celular = celular;
     }
 
-    public Brigada getCodBrigada() {
-        return codBrigada;
-    }
-
-    public void setCodBrigada(Brigada codBrigada) {
-        this.codBrigada = codBrigada;
-    }
-      public boolean isEstado() {
+    public boolean isEstado() {
         return estado;
     }
 
@@ -99,13 +104,31 @@ public class Bombero {
         this.estado = estado;
     }
 
-    @Override
-    public String toString() {
-        return  " dni= " + dni + " nombreApe=" + nombreApe + ", fechaNac=" + fechaNac + ", celular=" + celular + ", codBrigada=" + codBrigada + ", estado=" + estado ;
+    public String getApellido() {
+        return apellido;
     }
 
-   
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getGrupoSanguineo() {
+        return grupoSanguineo;
+    }
+
+    public void setGrupoSanguineo(String grupoSanguineo) {
+        this.grupoSanguineo = grupoSanguineo;
+    }
+
+    @Override
+    public String toString() {
+        return "Bombero{" + "idBombero=" + idBombero + ", nombre=" + nombre + ", fechaNac=" + fechaNac + ", codBrigada=" + codBrigada + ", dni=" + dni + ", celular=" + celular + ", estado=" + estado + ", apellido=" + apellido + ", grupoSanguineo=" + grupoSanguineo + '}';
+    }
     
     
+    
+    
+    
+
     
 }
