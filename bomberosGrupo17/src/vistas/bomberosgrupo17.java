@@ -5,7 +5,7 @@
  */
 package vistas;
 
-
+import entidades.MenuP;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -181,11 +181,11 @@ public class bomberosgrupo17 extends javax.swing.JFrame {
     }//GEN-LAST:event_jbBomberoActionPerformed
 
     private void jbMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMenuActionPerformed
-//        escritorio.repaint();
-//        menu bom=new menu();
-//        bom.setVisible(true);
-//        escritorio.add(bom);
-//        escritorio.moveToFront(bom);
+        escritorio.repaint();
+        menu bom=new menu();
+        bom.setVisible(true);
+        escritorio.add(bom);
+        escritorio.moveToFront(bom);
     }//GEN-LAST:event_jbMenuActionPerformed
 
     /**
