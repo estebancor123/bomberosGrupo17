@@ -5,12 +5,22 @@
  */
 package vistas;
 
+import acceso.a.datos.BrigadaData;
+import acceso.a.datos.CuartelData;
+import entidades.Brigada;
+import entidades.Cuartel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author dario
  */
 public class brigadaview extends javax.swing.JInternalFrame {
-
+private BrigadaData adata=new BrigadaData();
+private CuartelData cdata=new CuartelData();
+private Brigada bri=null;
+private Cuartel cua=null;
+    /**
     /**
      * Creates new form brigadaviews
      */
@@ -34,12 +44,12 @@ public class brigadaview extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jt_nro_cuartel = new javax.swing.JTextField();
         jtcodbrigada = new javax.swing.JTextField();
-        jbbuscarbrigada = new javax.swing.JButton();
+        jbBuscarBrigada = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jbeditar = new javax.swing.JButton();
+        jbGuardar = new javax.swing.JButton();
         jtespecialidad = new javax.swing.JTextField();
-        jbnuevo = new javax.swing.JButton();
-        jbeliminar = new javax.swing.JButton();
+        jbNuevo = new javax.swing.JButton();
+        jbEliminar = new javax.swing.JButton();
         jrestado = new javax.swing.JRadioButton();
         jrlibre = new javax.swing.JRadioButton();
 
@@ -52,20 +62,35 @@ public class brigadaview extends javax.swing.JInternalFrame {
 
         jLabel2.setText("codBrigada");
 
-        jbbuscarbrigada.setText("Buscar");
-        jbbuscarbrigada.addActionListener(new java.awt.event.ActionListener() {
+        jbBuscarBrigada.setText("Buscar");
+        jbBuscarBrigada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbbuscarbrigadaActionPerformed(evt);
+                jbBuscarBrigadaActionPerformed(evt);
             }
         });
 
         jLabel3.setText("especialidad");
 
-        jbeditar.setText("Guardar");
+        jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
-        jbnuevo.setText("Nuevo");
+        jbNuevo.setText("Nuevo");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoActionPerformed(evt);
+            }
+        });
 
-        jbeliminar.setText("Eliminar");
+        jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         jrestado.setText("estado");
 
@@ -107,7 +132,7 @@ public class brigadaview extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jbnuevo))
+                                .addComponent(jbNuevo))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,11 +142,11 @@ public class brigadaview extends javax.swing.JInternalFrame {
                                 .addGap(320, 320, 320)))
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jbbuscarbrigada)
+                            .addComponent(jbBuscarBrigada)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jbeditar)
+                                .addComponent(jbGuardar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbeliminar)))
+                                .addComponent(jbEliminar)))
                         .addGap(55, 55, 55))))
         );
         layout.setVerticalGroup(
@@ -133,7 +158,7 @@ public class brigadaview extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jtcodbrigada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbbuscarbrigada))
+                    .addComponent(jbBuscarBrigada))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -151,18 +176,92 @@ public class brigadaview extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jrestado)
-                    .addComponent(jbeditar)
-                    .addComponent(jbnuevo)
-                    .addComponent(jbeliminar))
+                    .addComponent(jbGuardar)
+                    .addComponent(jbNuevo)
+                    .addComponent(jbEliminar))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbbuscarbrigadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbbuscarbrigadaActionPerformed
+    private void jbBuscarBrigadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarBrigadaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jbbuscarbrigadaActionPerformed
+            try{
+            int code=Integer.parseInt(jtcodbrigada.getText());
+            
+            bri=adata.buscarBrigada(code);
+            
+            
+                if (bri!=null) {
+            
+                    jt_nro_cuartel.setText(bri.getCodCuartel()+"");
+                    jtcodbrigada.setText(bri.getCodBrigada()+"");
+                    jtespecialidad.setText(bri.getEspecialidad());
+                    jtnombre_br.setText(bri.getNombreBr());
+                    jrestado.setSelected(bri.isEstado());
+                    jrlibre.setSelected(bri.isLibre());
+
+                }else{
+                    JOptionPane.showMessageDialog(this, "intenté otra vez");
+                }     
+                       
+        }catch (NumberFormatException nf){
+            JOptionPane.showMessageDialog(this, "error al llenar los campos");
+        }
+        
+    }//GEN-LAST:event_jbBuscarBrigadaActionPerformed
+
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        // TODO add your handling code here:
+        jt_nro_cuartel.setText("");
+        jtcodbrigada.setText("");
+        jtespecialidad.setText("");
+        jtnombre_br.setText("");        
+        bri=null;
+    }//GEN-LAST:event_jbNuevoActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        // TODO add your handling code here:
+        if (bri!=null) {
+            adata.eliminarBrigada(bri.getCodBrigada());
+            bri=null;
+            limpiarCampos();
+        }else{
+            JOptionPane.showMessageDialog(this, "debe seleccionar un brigada");
+        }
+    }//GEN-LAST:event_jbEliminarActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        // TODO add your handling code here:
+         try{
+                        
+        int doc=Integer.parseInt(jtcodbrigada.getText());
+        String nomb=jtnombre_br.getText();
+        String espec=jtespecialidad.getText();
+        cua = cdata.buscarCuartel(Integer.parseInt(jt_nro_cuartel.getText()));
+        boolean est=jrestado.isSelected();
+        boolean lib=jrlibre.isSelected();
+            if (nomb.isEmpty()|| espec.isEmpty() ) {
+                JOptionPane.showMessageDialog(this,"llene todos los campos");
+                return ;
+            }
+            if (bri==null) {
+                bri=new Brigada(doc, nomb, espec, lib, nro_cuartel, est);
+                adata.guardarBrigada(bri);
+            }else{
+                bri.setCodBrigada(doc);
+                bri.setEspecialidad(espec);
+                bri.setNombreBr(nomb);
+                bri.setCodCuartel(cua);
+                bri.setEstado(est);
+                bri.setLibre(lib);
+                adata.modificarBrigada(bri);
+            }
+        }catch (NumberFormatException nf){
+            JOptionPane.showMessageDialog(this,"datos incorrectos");
+        }
+    }//GEN-LAST:event_jbGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -171,10 +270,10 @@ public class brigadaview extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JButton jbbuscarbrigada;
-    private javax.swing.JButton jbeditar;
-    private javax.swing.JButton jbeliminar;
-    private javax.swing.JButton jbnuevo;
+    private javax.swing.JButton jbBuscarBrigada;
+    private javax.swing.JButton jbEliminar;
+    private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbNuevo;
     private javax.swing.JRadioButton jrestado;
     private javax.swing.JRadioButton jrlibre;
     private javax.swing.JTextField jt_nro_cuartel;
@@ -182,4 +281,14 @@ public class brigadaview extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtespecialidad;
     private javax.swing.JTextField jtnombre_br;
     // End of variables declaration//GEN-END:variables
+
+public void limpiarCampos(){
+    jt_nro_cuartel.setText("");
+    jtcodbrigada.setText("");
+    jtespecialidad.setText("");
+    jtnombre_br.setText("");
+    bri=null;
+}
+
+
 }
