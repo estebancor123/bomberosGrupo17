@@ -6,6 +6,7 @@
 package vistas;
 
 
+import acceso.a.datos.SiniestroData;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -15,13 +16,15 @@ import javax.swing.ImageIcon;
  * @author pc2
  */
 public class bomberosgrupo17 extends javax.swing.JFrame {
-
+private SiniestroData sd= new SiniestroData();
     /**
      * Creates new form bomberosgrupo17
      */
     public bomberosgrupo17() {
         initComponents();
-        
+        transparenciaBotones();
+        jtTotalSin.setText(sd.cantidadDeSiniestros().size()+"");
+        jtSinAyHoy.setText(sd.ListarSiniestrosEntreFechas().size()+"");
         
     }
 
@@ -34,7 +37,7 @@ public class bomberosgrupo17 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImageIcon icono = new ImageIcon(getClass().getResource("/imagenes/siniestro1.jpg"));
+        ImageIcon icono = new ImageIcon(getClass().getResource("/imagenes/menu1.png"));
         Image gen= icono.getImage();
         escritorio = new javax.swing.JDesktopPane(){
             public void paintComponent(Graphics g){
@@ -47,7 +50,26 @@ public class bomberosgrupo17 extends javax.swing.JFrame {
         jbSiniestro = new javax.swing.JButton();
         jbBrigada = new javax.swing.JButton();
         jbCuartel = new javax.swing.JButton();
-        jbMenu = new javax.swing.JButton();
+        ImageIcon icono2 = new ImageIcon(getClass().getResource("/imagenes/bannner.png"));
+        Image gen2= icono2.getImage();
+        jDBanner = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+                g.drawImage(gen2,0,0,getWidth(),getHeight(),this);
+
+            }
+        };
+        jLabel1 = new javax.swing.JLabel();
+        jtTotalSin = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jtSinAyHoy = new javax.swing.JTextField();
+        ImageIcon icono3 = new ImageIcon(getClass().getResource("/imagenes/FondoP1.png"));
+        Image gen3= icono3.getImage();
+        jDFormularios = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+                g.drawImage(gen3,0,0,getWidth(),getHeight(),this);
+
+            }
+        };
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -60,28 +82,35 @@ public class bomberosgrupo17 extends javax.swing.JFrame {
         jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jbBombero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/brigada1.jpeg"))); // NOI18N
-        jbBombero.setText("Bombero");
+        escritorio.setPreferredSize(new java.awt.Dimension(203, 714));
+
+        jbBombero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/botonbobero.png"))); // NOI18N
         jbBombero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBomberoActionPerformed(evt);
             }
         });
 
-        jbSiniestro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/siniestroIcono.png"))); // NOI18N
-        jbSiniestro.setText("Siniestro");
-
-        jbBrigada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/brigadaIcono.png"))); // NOI18N
-        jbBrigada.setText("Brigada");
-
-        jbCuartel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cuartelIcono.png"))); // NOI18N
-        jbCuartel.setText("Cuartel");
-
-        jbMenu.setText("menu");
-        jbMenu.addActionListener(new java.awt.event.ActionListener() {
+        jbSiniestro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/botonsini.png"))); // NOI18N
+        jbSiniestro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbMenuActionPerformed(evt);
+                jbSiniestroActionPerformed(evt);
+            }
+        });
+
+        jbBrigada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/botonbri.png"))); // NOI18N
+        jbBrigada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBrigadaActionPerformed(evt);
+            }
+        });
+
+        jbCuartel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/botoncuar.png"))); // NOI18N
+        jbCuartel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCuartelActionPerformed(evt);
             }
         });
 
@@ -89,39 +118,105 @@ public class bomberosgrupo17 extends javax.swing.JFrame {
         escritorio.setLayer(jbSiniestro, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jbBrigada, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jbCuartel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        escritorio.setLayer(jbMenu, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
-                .addContainerGap(155, Short.MAX_VALUE)
+            .addGroup(escritorioLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbSiniestro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbBombero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(136, 136, 136)
-                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbMenu)
-                    .addComponent(jbCuartel, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbBrigada, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(191, 191, 191))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
+                        .addComponent(jbBombero, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1))
+                    .addComponent(jbBrigada, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbCuartel, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jbMenu)
-                .addGap(26, 26, 26)
-                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbBombero, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbBrigada, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
-                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbCuartel, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61))
+                .addContainerGap(318, Short.MAX_VALUE)
+                .addComponent(jbBombero, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(jbBrigada, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jbSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(jbCuartel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(188, 188, 188))
         );
+
+        getContentPane().add(escritorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, -1));
+
+        jDBanner.setBackground(new java.awt.Color(153, 255, 255));
+        jDBanner.setPreferredSize(new java.awt.Dimension(1000, 140));
+
+        jLabel1.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Siniestros totalas ");
+
+        jtTotalSin.setEditable(false);
+        jtTotalSin.setBackground(new java.awt.Color(255, 102, 0));
+
+        jLabel2.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Siniestros ocurridos  entre ayer y hoy");
+
+        jtSinAyHoy.setEditable(false);
+        jtSinAyHoy.setBackground(new java.awt.Color(255, 102, 0));
+
+        jDBanner.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDBanner.setLayer(jtTotalSin, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDBanner.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDBanner.setLayer(jtSinAyHoy, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jDBannerLayout = new javax.swing.GroupLayout(jDBanner);
+        jDBanner.setLayout(jDBannerLayout);
+        jDBannerLayout.setHorizontalGroup(
+            jDBannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDBannerLayout.createSequentialGroup()
+                .addGap(339, 339, 339)
+                .addGroup(jDBannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(jDBannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jtTotalSin)
+                    .addComponent(jtSinAyHoy, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(370, Short.MAX_VALUE))
+        );
+        jDBannerLayout.setVerticalGroup(
+            jDBannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDBannerLayout.createSequentialGroup()
+                .addContainerGap(43, Short.MAX_VALUE)
+                .addGroup(jDBannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jtTotalSin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jDBannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jtSinAyHoy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39))
+        );
+
+        getContentPane().add(jDBanner, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, -1, -1));
+
+        jDFormularios.setPreferredSize(new java.awt.Dimension(1000, 574));
+
+        javax.swing.GroupLayout jDFormulariosLayout = new javax.swing.GroupLayout(jDFormularios);
+        jDFormularios.setLayout(jDFormulariosLayout);
+        jDFormulariosLayout.setHorizontalGroup(
+            jDFormulariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1000, Short.MAX_VALUE)
+        );
+        jDFormulariosLayout.setVerticalGroup(
+            jDFormulariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 574, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jDFormularios, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, -1, -1));
 
         jMenu1.setText("Boberos");
 
@@ -156,37 +251,44 @@ public class bomberosgrupo17 extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBomberoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBomberoActionPerformed
-        escritorio.repaint();
+         jDFormularios.removeAll();
+        jDFormularios.repaint();
         bomberoview bom=new bomberoview();
         bom.setVisible(true);
-        escritorio.add(bom);
-        escritorio.moveToFront(bom);
+        jDFormularios.add(bom);
+        jDFormularios.moveToFront(bom);
     }//GEN-LAST:event_jbBomberoActionPerformed
 
-    private void jbMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMenuActionPerformed
-//        escritorio.repaint();
-//        menu bom=new menu();
-//        bom.setVisible(true);
-//        escritorio.add(bom);
-//        escritorio.moveToFront(bom);
-    }//GEN-LAST:event_jbMenuActionPerformed
+    private void jbBrigadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBrigadaActionPerformed
+       jDFormularios.removeAll();
+        jDFormularios.repaint();
+        brigadaview bom=new brigadaview();
+        bom.setVisible(true);
+        jDFormularios.add(bom);
+        jDFormularios.moveToFront(bom);
+    }//GEN-LAST:event_jbBrigadaActionPerformed
+
+    private void jbSiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSiniestroActionPerformed
+        jDFormularios.removeAll();
+        jDFormularios.repaint();
+        siniestroview2 bom=new siniestroview2();
+        bom.setVisible(true);
+        jDFormularios.add(bom);
+        jDFormularios.moveToFront(bom);
+    }//GEN-LAST:event_jbSiniestroActionPerformed
+
+    private void jbCuartelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCuartelActionPerformed
+         jDFormularios.removeAll();
+        jDFormularios.repaint();
+        cuartelview2 bom=new cuartelview2();
+        bom.setVisible(true);
+        jDFormularios.add(bom);
+        jDFormularios.moveToFront(bom);
+    }//GEN-LAST:event_jbCuartelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,6 +327,10 @@ public class bomberosgrupo17 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JDesktopPane jDBanner;
+    private javax.swing.JDesktopPane jDFormularios;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -238,8 +344,28 @@ public class bomberosgrupo17 extends javax.swing.JFrame {
     private javax.swing.JButton jbBombero;
     private javax.swing.JButton jbBrigada;
     private javax.swing.JButton jbCuartel;
-    private javax.swing.JButton jbMenu;
     private javax.swing.JButton jbSiniestro;
+    private javax.swing.JTextField jtSinAyHoy;
+    private javax.swing.JTextField jtTotalSin;
     // End of variables declaration//GEN-END:variables
+private void siniestroTotales(int s){
+    
+    
+}
+public void transparenciaBotones(){
+    jbBombero.setOpaque(false);
+    jbBombero.setContentAreaFilled(false);
+    jbBombero.setBorderPainted(false);
+    jbBrigada.setOpaque(false);
+    jbBrigada.setContentAreaFilled(false);
+    jbBrigada.setBorderPainted(false);
+    jbCuartel.setOpaque(false);
+    jbCuartel.setContentAreaFilled(false);
+    jbCuartel.setBorderPainted(false);
+    jbSiniestro.setOpaque(false);
+    jbSiniestro.setContentAreaFilled(false);
+    jbSiniestro.setBorderPainted(false);
+  
+}
 
 }

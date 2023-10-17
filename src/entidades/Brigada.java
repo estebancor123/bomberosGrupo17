@@ -20,7 +20,7 @@ public class Brigada {
     public Brigada() {
     }
 
-    public Brigada(int codBrigada, String nombreBr, String especialidad, boolean libre, Cuartel codCuartel) {
+    public Brigada(int codBrigada, String nombreBr, String especialidad, boolean libre, Cuartel codCuartel,boolean estado) {
         this.codBrigada = codBrigada;
         this.nombreBr = nombreBr;
         this.especialidad = especialidad;
@@ -29,7 +29,7 @@ public class Brigada {
         this.estado = estado;
     }
 
-    public Brigada(String nombreBr, String especialidad, boolean libre, Cuartel codCuartel) {
+    public Brigada(String nombreBr, String especialidad, boolean libre, Cuartel codCuartel,boolean estado) {
         this.nombreBr = nombreBr;
         this.especialidad = especialidad;
         this.libre = libre;
@@ -87,8 +87,10 @@ public class Brigada {
 
     @Override
     public String toString() {
-      return  " nombreBr= "+ nombreBr + " , especialidad= " + especialidad+" ,codCuartel= " + codCuartel.getCodCuartel()  ;
+        return "Brigada{" + "codBrigada=" + codBrigada + ", nombreBr=" + nombreBr + ", especialidad=" + especialidad + ", libre=" + libre + ", codCuartel=" + codCuartel + ", estado=" + estado + '}';
     }
+
+  
 
     
     

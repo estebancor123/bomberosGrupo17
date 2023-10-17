@@ -59,7 +59,7 @@ public class BomberoData {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero"+ex);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero 02"+ex);
         }
     
     
@@ -68,7 +68,7 @@ public class BomberoData {
 //        UPDATE `bombero` SET `id_bombrero`='[value-1]',`nombre_ape`='[value-2]',`fecha_nac`='[value-3]',`codBrigada`='[value-4]',
 //                          `dni`='[value-5]',`celular`='[value-6]' WHERE 1
        
-       String sql = "UPDATE bombero SET nombre=?, fecha_nac=?, codBrigada=?, dni=?,celular=?,apellido=?,grupo sanguineo=? "
+       String sql = "UPDATE bombero SET nombre=?, fecha_nac=?, codBrigada=?, dni=?,celular=?,apellido=?,grupo_sanguineo=? "
                 + "WHERE id_bombrero = ?";
 
         try {
@@ -90,7 +90,7 @@ public class BomberoData {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero 01"+ex);
         }
     }  
      public void eliminarBombero(int id) {
