@@ -7,13 +7,18 @@ package vistas;
 
 import acceso.a.datos.BomberoData;
 import acceso.a.datos.BrigadaData;
+import acceso.a.datos.SiniestroData;
 import entidades.Bombero;
 import entidades.Brigada;
+import entidades.Siniestro;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -26,12 +31,16 @@ private BomberoData bData= new BomberoData();
 private Bombero bom=new Bombero();
 private BrigadaData brigadaData= new BrigadaData();
 private Brigada bri=null;
+private String[] gruposanguineo = {"O-","O+","A+","A-","B+","B+","AB-","AB+"};
     /**
      * Creates new form bomberoview
      */
     public bomberoview() {
         initComponents();
         transparenciaBotones();
+        CargarGrupoSanguineo();
+        cargarComboBrigadas ();
+        limpiarCampos();
     }
 
     /**
@@ -52,15 +61,11 @@ private Brigada bri=null;
             }
 
         };
-        jLabel2 = new javax.swing.JLabel();
-        jtIdbombero = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jtCodbrigada = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jdFechaNac = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
         jtNombre = new javax.swing.JTextField();
-        jtGruposanguineo = new javax.swing.JTextField();
         jtDocumento = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jtApellido = new javax.swing.JTextField();
@@ -76,65 +81,62 @@ private Brigada bri=null;
         jbBuscar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        jcGruposanguineo = new javax.swing.JComboBox<>();
+        jcBrigadas = new javax.swing.JComboBox<>();
 
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         setPreferredSize(new java.awt.Dimension(1000, 574));
 
         jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
         jDesktopPane1.setPreferredSize(new java.awt.Dimension(1000, 574));
         jDesktopPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        jLabel2.setText("idBombero");
-        jDesktopPane1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
-        jDesktopPane1.add(jtIdbombero, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, 149, -1));
-
         jLabel1.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel1.setText("Bombero");
         jDesktopPane1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, 100, -1));
-        jDesktopPane1.add(jtCodbrigada, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, 150, -1));
 
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel3.setText("Nombre ");
-        jDesktopPane1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
-        jDesktopPane1.add(jdFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, 160, -1));
+        jDesktopPane1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
+        jDesktopPane1.add(jdFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 350, 160, -1));
 
         jLabel6.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel6.setText("Celular");
-        jDesktopPane1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, -1));
-        jDesktopPane1.add(jtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, 149, -1));
-        jDesktopPane1.add(jtGruposanguineo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 410, 149, -1));
-        jDesktopPane1.add(jtDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, 149, -1));
+        jDesktopPane1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
+        jDesktopPane1.add(jtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 150, -1));
+        jDesktopPane1.add(jtDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, 150, -1));
 
         jLabel4.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel4.setText("Apellido");
-        jDesktopPane1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, -1, -1));
-        jDesktopPane1.add(jtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 149, -1));
+        jDesktopPane1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
+        jDesktopPane1.add(jtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, 160, -1));
 
         jLabel7.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        jLabel7.setText("CodBrigada");
-        jDesktopPane1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, -1));
+        jLabel7.setText("Codigo de Brigada");
+        jDesktopPane1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel5.setText("Documento");
-        jDesktopPane1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
+        jDesktopPane1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel8.setText("Fecha de Nacimiento");
-        jDesktopPane1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, -1, -1));
-        jDesktopPane1.add(jtCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, 150, -1));
+        jDesktopPane1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, -1, -1));
+        jDesktopPane1.add(jtCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, 160, -1));
 
-        jrEstado.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        jrEstado.setForeground(new java.awt.Color(255, 255, 255));
+        jrEstado.setBackground(new java.awt.Color(255, 255, 255));
+        jrEstado.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jrEstado.setText("Vacio = Inactivo");
         jrEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrEstadoActionPerformed(evt);
             }
         });
-        jDesktopPane1.add(jrEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 440, -1, -1));
+        jDesktopPane1.add(jrEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 420, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        jLabel9.setText("grupo sanguíneo");
-        jDesktopPane1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, -1, -1));
+        jLabel9.setText("Grupo sanguíneo");
+        jDesktopPane1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, -1, -1));
 
         jbNuevo.setBackground(new java.awt.Color(255, 255, 255));
         jbNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/mas112.png"))); // NOI18N
@@ -181,17 +183,21 @@ private Brigada bri=null;
 
         jLabel10.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel10.setText("Estado");
-        jDesktopPane1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, -1, -1));
+        jDesktopPane1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, -1, -1));
+
+        jDesktopPane1.add(jcGruposanguineo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 390, 160, -1));
+
+        jDesktopPane1.add(jcBrigadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 310, 160, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1010, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 998, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
         );
 
         pack();
@@ -200,8 +206,9 @@ private Brigada bri=null;
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
           try{
         //(12,"Cordoba",LocalDate.of(1980, 04, 25),brigada1,7777,5555,true,"Martinez","a+")
-              if (jdFechaNac.getDate()==null) {
-                   JOptionPane.showMessageDialog(this,"llene todos los campos");
+             
+                if (jdFechaNac.getDate()==null) {
+                   JOptionPane.showMessageDialog(this,"Seleccione una fecha");
               }else{
  
         LocalDate fechaN= jdFechaNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -210,27 +217,34 @@ private Brigada bri=null;
         String ape=jtApellido.getText();
         boolean est=jrEstado.isSelected();
         //int codigoB=Integer.parseInt(jtCodbrigada.getText());
-        String grupoS=jtGruposanguineo.getText();
-        bri=brigadaData.buscarBrigada(Integer.parseInt(jtCodbrigada.getText()));
-        int celular=Integer.parseInt(jtCelular.getText());
-        int idBombero=Integer.parseInt(jtIdbombero.getText());        
-            if (nomb.isEmpty()|| ape.isEmpty() ) {
-                JOptionPane.showMessageDialog(this,"llene todos los campos");
-                return ;
-            }
-            if (bom==null) {
-                bom=new Bombero(nomb,fechaN,bri,doc,celular,est,ape,grupoS);
-                bData.guardarBombero(bom);
-            }else{
-                bom.setDni(doc);
-                bom.setApellido(ape);
-                bom.setNombre(nomb);
-                bom.setFechaNac(fechaN);
-                bom.setCodBrigada(bri);
-                bom.setGrupoSanguineo(grupoS);
-                bom.setCelular(celular);
-                bData.modificarBombero(bom);
-            }
+        String grupoS=jcGruposanguineo.getSelectedItem()+"";
+        
+        bri=brigadaData.buscarBrigada(Integer.parseInt(jcBrigadas.getSelectedItem()+""));
+        int celular = Integer.parseInt(jtCelular.getText());
+                     
+                     
+                    if (!(doc >= 3000000 && doc <= 70000000)) {
+                        JOptionPane.showMessageDialog(this, "Ingrese un numero  de 8 digitos");
+                        return ;
+                    }
+                    if (nomb.isEmpty() || ape.isEmpty()) {
+                        JOptionPane.showMessageDialog(this, "Nombre y/o Apellido vacios");
+                        return;
+                    }
+                    if (bom == null) {
+                        bom = new Bombero(nomb, fechaN, bri, doc, celular, est, ape, grupoS);
+                        bData.guardarBombero(bom);
+                        
+                    } else {
+                        bom.setDni(doc);
+                        bom.setApellido(ape);
+                        bom.setNombre(nomb);
+                        bom.setFechaNac(fechaN);
+                        bom.setCodBrigada(bri);
+                        bom.setGrupoSanguineo(grupoS);
+                        bom.setCelular(celular);
+                        bData.modificarBombero(bom);
+                    }
               }
         }catch (NumberFormatException nf){
             JOptionPane.showMessageDialog(this,"datos incorrectos 02"+nf);
@@ -245,15 +259,7 @@ private Brigada bri=null;
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         // TODO add your handling code here:
         
-        jtDocumento.setText("");
-        jtApellido.setText("");
-        jtNombre.setText("");
-        jdFechaNac.setDate(null);
-        jtGruposanguineo.setText("");
-        jtCelular.setText("");
-        jtIdbombero.setText("");
-        jtCodbrigada.setText("");
-        bom=null;
+    limpiarCampos();
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
@@ -269,29 +275,34 @@ private Brigada bri=null;
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         try {
-            int code=Integer.parseInt(jtIdbombero.getText());
+            int code=Integer.parseInt(jtDocumento.getText());
+            
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "error ingrese un entro");
+            JOptionPane.showMessageDialog(this, "error ingrese un Documento correcto");
         }
         
         try{
-            int code=Integer.parseInt(jtIdbombero.getText());
+            int code=Integer.parseInt(jtDocumento.getText());
             
             BomberoData buscar =new BomberoData();
             bom=bData.buscarBombero(code);
             
             
                 if (bom!=null) {
-            
+            Brigada bri2=brigadaData.buscarBrigada(bom.getCodBrigada().getCodBrigada());
             jtNombre.setText(bom.getNombre());
             jtApellido.setText(bom.getApellido());
             Date date = Date.from(bom.getFechaNac().atStartOfDay(ZoneId.systemDefault()).toInstant());
             jdFechaNac.setDate(date);
             jrEstado.setSelected(bom.isEstado());
-            jtCodbrigada.setText(bom.getCodBrigada().getCodBrigada()+"");
+            setBrigada(bri2.getCodBrigada()+"");
+//            setBrigada(bri2.getCodBrigada()+" "+bri2.getNombreBr()); // original
             jtCelular.setText(bom.getCelular()+"");
-            jtGruposanguineo.setText(bom.getGrupoSanguineo());
-            jtDocumento.setText(bom.getDni()+"");
+            jcGruposanguineo.setSelectedItem(bom.getGrupoSanguineo());
+                    if (bom.isEstado()==false) {
+                        JOptionPane.showMessageDialog(this, "El bombero no se encuentra activo"); 
+                    }
+            //jtDocumento.setText(bom.getDni()+"");
                 }else{
                     JOptionPane.showMessageDialog(this, "intenté otra vez");
                 }
@@ -304,6 +315,9 @@ private Brigada bri=null;
 
     private void jrEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrEstadoActionPerformed
         // TODO add your handling code here:
+//        if (jrEstado.isSelected()) {
+//           JOptionPane.showMessageDialog(this, "El bombero no se encuentra activo"); 
+//        }
     }//GEN-LAST:event_jrEstadoActionPerformed
 
 
@@ -311,7 +325,6 @@ private Brigada bri=null;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -324,25 +337,26 @@ private Brigada bri=null;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
+    private javax.swing.JComboBox<String> jcBrigadas;
+    private javax.swing.JComboBox<String> jcGruposanguineo;
     private com.toedter.calendar.JDateChooser jdFechaNac;
     private javax.swing.JRadioButton jrEstado;
     private javax.swing.JTextField jtApellido;
     private javax.swing.JTextField jtCelular;
-    private javax.swing.JTextField jtCodbrigada;
     private javax.swing.JTextField jtDocumento;
-    private javax.swing.JTextField jtGruposanguineo;
-    private javax.swing.JTextField jtIdbombero;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
-public void limpiarCampos(){
-   jtDocumento.setText("");
+
+    
+    public void limpiarCampos(){
+        jtDocumento.setText("");
         jtApellido.setText("");
         jtNombre.setText("");
-        jdFechaNac.setDate(new Date ());
-        jtGruposanguineo.setText("");
+        jdFechaNac.setDate(null);
+        jcGruposanguineo.setSelectedItem(null);
         jtCelular.setText("");
-        jtIdbombero.setText("");
-        jtCodbrigada.setText("");
+        jcBrigadas.setSelectedItem(null);
+        jrEstado.setSelected(false);
         bom=null;
 }
 public void transparenciaBotones(){
@@ -364,6 +378,41 @@ public void transparenciaBotones(){
     jbSalir.setOpaque(false);
     jbSalir.setContentAreaFilled(false);
     jbSalir.setBorderPainted(false);
+}
+ private void CargarGrupoSanguineo(){
+
+        
+        for (int i = 0; i < gruposanguineo.length; i++) {
+            jcGruposanguineo.addItem(gruposanguineo[i]);
+
+        }
+
+    }
+private void cargarComboBrigadas (){
+
+ArrayList<String> lista=brigadaData.listarBrigadas2(); 
+
+    for (int i = 0; i < lista.size(); i++) {
+//   alumno p=new alumno(lista.get(i).getIdAlumno(),lista.get(i).getDni(),lista.get(i).getApellido(),lista.get(i).getNombre(),lista.get(i).getFechaNac(),lista.get(i).isActivo());
+        jcBrigadas.addItem(lista.get(i));
+                
+               
+    }
+}
+public void setBrigada(String e){
+  ArrayList<String> lista=brigadaData.listarBrigadas2();
+  int i=0;
+  Iterator<String> Iterator3 = lista.iterator();
+    while(Iterator3.hasNext ()){
+    
+        String elemento = Iterator3.next();
+        if (elemento.equals(e)) {
+           jcBrigadas.setSelectedIndex(i);
+        }
+        i++;
+    } 
+   
+    
 }
 }
 

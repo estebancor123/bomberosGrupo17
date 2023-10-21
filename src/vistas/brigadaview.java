@@ -23,6 +23,8 @@ private BrigadaData adata=new BrigadaData();
 private CuartelData cdata=new CuartelData();
 private Brigada bri=null;
 private Cuartel cua=null;
+private String[] especial = {"incendios", "salvamento", "rescates en montaña", "inundaciones", "accidentes de tráfico", "prevención"};
+
     /**
     /**
      * Creates new form brigadaviews
@@ -30,6 +32,8 @@ private Cuartel cua=null;
     public brigadaview() {
         initComponents();
         transparenciaBotones();
+        CargarEspecialidad();
+        limpiarCampos();
     }
 
     /**
@@ -60,26 +64,30 @@ private Cuartel cua=null;
         jbBuscar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jbGuardar = new javax.swing.JButton();
-        jtespecialidad = new javax.swing.JTextField();
         jbNuevo = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
         jrestado = new javax.swing.JRadioButton();
         jrlibre = new javax.swing.JRadioButton();
         jbSalir = new javax.swing.JButton();
+        jcEspecialidad = new javax.swing.JComboBox<>();
 
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         setPreferredSize(new java.awt.Dimension(1000, 574));
 
         jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
         jDesktopPane1.setPreferredSize(new java.awt.Dimension(1000, 574));
 
-        jLabel6.setText("nombre_brigada");
+        jLabel6.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        jLabel6.setText("Nombre de la Brigada");
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel1.setText("Brigada");
 
-        jLabel7.setText("nro_Cuartel");
+        jLabel7.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        jLabel7.setText("Nro Cuartel");
 
-        jLabel2.setText("codBrigada");
+        jLabel2.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        jLabel2.setText("Buscar por CodBrigada");
 
         jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar323232.png"))); // NOI18N
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +96,8 @@ private Cuartel cua=null;
             }
         });
 
-        jLabel3.setText("especialidad");
+        jLabel3.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        jLabel3.setText("Especialidad");
 
         jbGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardar123123.png"))); // NOI18N
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -111,9 +120,11 @@ private Cuartel cua=null;
             }
         });
 
-        jrestado.setText("estado");
+        jrestado.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        jrestado.setText("Estado");
 
-        jrlibre.setText("libre");
+        jrlibre.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        jrlibre.setText("Libre");
 
         jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salir777777777.png"))); // NOI18N
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -132,12 +143,12 @@ private Cuartel cua=null;
         jDesktopPane1.setLayer(jbBuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jbGuardar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jtespecialidad, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jbNuevo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jbEliminar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jrestado, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jrlibre, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jbSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jcEspecialidad, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -171,33 +182,28 @@ private Cuartel cua=null;
                                         .addComponent(jtcodbrigada, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jtespecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jt_nro_cuartel, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jtnombre_br, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(56, 56, 56))))
+                                    .addComponent(jt_nro_cuartel, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jcEspecialidad, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jtnombre_br, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE))))
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                        .addGap(19, 19, 19)
-                                        .addComponent(jrlibre))
-                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                        .addGap(19, 19, 19)
-                                        .addComponent(jrestado))
-                                    .addComponent(jLabel6)
-                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                        .addGap(2, 2, 2)
-                                        .addComponent(jLabel7)))
-                                .addGap(326, 326, 326)))))
-                .addContainerGap(450, Short.MAX_VALUE))
+                                .addGap(19, 19, 19)
+                                .addComponent(jrlibre))
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addComponent(jrestado))
+                            .addComponent(jLabel6)
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jLabel7)))))
+                .addContainerGap(451, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                 .addGap(68, 68, 68)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
@@ -206,7 +212,7 @@ private Cuartel cua=null;
                 .addGap(18, 18, 18)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jtespecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -233,7 +239,7 @@ private Cuartel cua=null;
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 903, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 998, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,7 +263,7 @@ private Cuartel cua=null;
             
                     jt_nro_cuartel.setText(bri.getCodCuartel().getCodCuartel()+"");
                     jtcodbrigada.setText(bri.getCodBrigada()+"");
-                    jtespecialidad.setText(bri.getEspecialidad());
+                    jcEspecialidad.setSelectedItem(bri.getEspecialidad());
                     jtnombre_br.setText(bri.getNombreBr());
                     jrestado.setSelected(bri.isEstado());
                     jrlibre.setSelected(bri.isLibre());
@@ -292,9 +298,9 @@ private Cuartel cua=null;
         // TODO add your handling code here:
          try{
                         
-        int doc=Integer.parseInt(jtcodbrigada.getText());
+        
         String nomb=jtnombre_br.getText();
-        String espec=jtespecialidad.getText();
+        String espec=jcEspecialidad.getSelectedItem()+"";
         cua = cdata.buscarCuartel(Integer.parseInt(jt_nro_cuartel.getText()));
         boolean est=jrestado.isSelected();
         boolean lib=jrlibre.isSelected();
@@ -303,9 +309,12 @@ private Cuartel cua=null;
                 return ;
             }
             if (bri==null) {
-                bri=new Brigada(doc, nomb, espec, lib,cua,est);
+                bri=new Brigada(nomb, espec, lib,cua,est);
                 adata.guardarBrigada(bri);
+                limpiarCampos();
+                
             }else{
+                int doc=Integer.parseInt(jtcodbrigada.getText());
                 bri.setCodBrigada(doc);
                 bri.setEspecialidad(espec);
                 bri.setNombreBr(nomb);
@@ -336,18 +345,18 @@ private Cuartel cua=null;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
+    private javax.swing.JComboBox<String> jcEspecialidad;
     private javax.swing.JRadioButton jrestado;
     private javax.swing.JRadioButton jrlibre;
     private javax.swing.JTextField jt_nro_cuartel;
     private javax.swing.JTextField jtcodbrigada;
-    private javax.swing.JTextField jtespecialidad;
     private javax.swing.JTextField jtnombre_br;
     // End of variables declaration//GEN-END:variables
 
 public void limpiarCampos(){
     jt_nro_cuartel.setText("");
     jtcodbrigada.setText("");
-    jtespecialidad.setText("");
+    jcEspecialidad.setSelectedItem(null);
     jtnombre_br.setText("");
     jrlibre.setSelected(false);
     jrestado.setSelected(false);
@@ -373,5 +382,13 @@ public void transparenciaBotones(){
     jbSalir.setContentAreaFilled(false);
     jbSalir.setBorderPainted(false);
 }
+    private void CargarEspecialidad(){
 
+        
+        for (int i = 0; i < especial.length; i++) {
+            jcEspecialidad.addItem(especial[i]);
+
+        }
+
+    }
 }

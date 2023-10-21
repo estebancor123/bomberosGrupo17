@@ -59,7 +59,7 @@ public class BomberoData {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero 02"+ex);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero 02222"+ex);
         }
     
     
@@ -68,8 +68,8 @@ public class BomberoData {
 //        UPDATE `bombero` SET `id_bombrero`='[value-1]',`nombre_ape`='[value-2]',`fecha_nac`='[value-3]',`codBrigada`='[value-4]',
 //                          `dni`='[value-5]',`celular`='[value-6]' WHERE 1
        
-       String sql = "UPDATE bombero SET nombre=?, fecha_nac=?, codBrigada=?, dni=?,celular=?,apellido=?,grupo_sanguineo=? "
-                + "WHERE id_bombrero = ?";
+       String sql = "UPDATE bombero SET nombre=?, fecha_nac=?, codBrigada=?,celular=?,estado=?,apellido=?,grupo_sanguineo=? "
+                + "WHERE dni = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -78,11 +78,11 @@ public class BomberoData {
             
             ps.setDate(2, Date.valueOf(bombero.getFechaNac()));
             ps.setInt(3, bombero.getCodBrigada().getCodBrigada());
-            ps.setInt(4, bombero.getDni());
-             ps.setInt(5, bombero.getCelular());
+             ps.setInt(4, bombero.getCelular());
+             ps.setBoolean(5, bombero.isEstado());
              ps.setString(6, bombero.getApellido());
              ps.setString(7, bombero.getGrupoSanguineo());
-              ps.setInt(8, bombero.getIdBombero());
+              ps.setInt(8, bombero.getDni());
             //ps.executeUpdate();
             int exito = ps.executeUpdate();
             if (exito == 1) {
@@ -90,8 +90,10 @@ public class BomberoData {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero 01"+ex);
-        }
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero 0111"+ex);
+        } catch  (NullPointerException np) {
+            JOptionPane.showMessageDialog(null, "no sean boludos"); 
+        } 
     }  
      public void eliminarBombero(int id) {
         String sql = "UPDATE bombero SET estado = 0 WHERE id_bombrero = ?";
@@ -113,32 +115,32 @@ public class BomberoData {
         }
 
     }
-        public Bombero buscarBombero (int id){
+        public Bombero buscarBombero (int dni){
 
-        String sql = "SELECT nombre, fecha_nac, codBrigada, dni,celular,apellido,grupo_sanguineo FROM bombero WHERE  id_bombrero = ? AND estado = 1";
+        String sql = "SELECT nombre, fecha_nac, codBrigada,celular,estado,apellido,grupo_sanguineo FROM bombero WHERE  dni = ? ";
         
         Bombero bombero=null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setInt(1, dni);
             ResultSet rs=ps.executeQuery();
             if(rs.next()){
                 
                 bombero=new Bombero();
-               bombero.setIdBombero(id);
+               bombero.setDni(dni);
                 bombero.setNombre(rs.getString("nombre"));
                 bombero.setFechaNac(rs.getDate("fecha_nac").toLocalDate());
               //  bombero.setCodBrigada(rs.getInt("codBrigada"));
               Brigada brigada=bd.buscarBrigada(rs.getInt("codBrigada"));
               bombero.setCodBrigada(brigada);
-               bombero.setDni(rs.getInt("dni"));
+               
                 bombero.setCelular(rs.getInt("celular"));
-                bombero.setEstado(true);
+                bombero.setEstado(rs.getBoolean("estado"));
                 bombero.setApellido(rs.getString("apellido"));
                 bombero.setGrupoSanguineo(rs.getString("grupo_sanguineo"));
             } else {
                             
-                JOptionPane.showMessageDialog(null, "Bombero no encontrado con ese ID");
+                JOptionPane.showMessageDialog(null, "Bombero no encontrado con ese Documento");
                 
             }
                 ps.close();   

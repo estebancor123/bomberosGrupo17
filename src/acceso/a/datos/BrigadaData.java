@@ -33,8 +33,8 @@ public class BrigadaData {
     public void guardarBrigada(Brigada brigada){
    // INSERT INTO `brigada`(`codBrigada`, `nombre_br`, `especialidad`, `libre`, `nro_cuartel`)
 
-    String sql = "INSERT INTO brigada (nombre_br, especialidad, libre,nro_cuartel)"
-                + "VALUES(?,?,?,?)";
+    String sql = "INSERT INTO brigada (nombre_br, especialidad, libre,nro_cuartel,estado)"
+                + "VALUES(?,?,?,?,?)";
         try {
 
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -43,7 +43,7 @@ public class BrigadaData {
             ps.setString(2,brigada.getEspecialidad());
             ps.setBoolean(3,brigada.isLibre());
             ps.setInt(4, brigada.getCodCuartel().getCodCuartel());
-            
+            ps.setBoolean(5,brigada.isEstado());
             
             ps.executeUpdate();
 
@@ -64,7 +64,7 @@ public class BrigadaData {
   
 public Brigada buscarBrigada (int id){
 //`brigada`(`codBrigada`, `nombre_br`, `especialidad`, `libre`, `nro_cuartel`) 
-        String sql = "SELECT nombre_br, especialidad, libre, nro_cuartel,estado FROM brigada WHERE  codBrigada = ? AND estado = 1  " ;
+        String sql = "SELECT nombre_br, especialidad, libre, nro_cuartel,estado FROM brigada WHERE  codBrigada = ?  " ;
         
         Brigada brigada=null;
         try {
@@ -79,12 +79,12 @@ public Brigada buscarBrigada (int id){
                 brigada.setEspecialidad(rs.getString("especialidad"));
                 brigada.setLibre(rs.getBoolean("libre"));
                Cuartel cuartel=cd.buscarCuartel(rs.getInt("nro_cuartel"));
-               brigada.setEstado(true);
+               brigada.setEstado(rs.getBoolean("estado"));
                brigada.setCodCuartel(cuartel);
 
             } else {
                             
-                JOptionPane.showMessageDialog(null, "Brigada no encontrado con ese ID");
+                JOptionPane.showMessageDialog(null, "Brigada no encontrado con ese Codigo");
                 
             }
                 ps.close();   
@@ -232,4 +232,32 @@ public Brigada buscarBrigada (int id){
             return brig;
 
 }
+       public ArrayList<String> listarBrigadas2() {
+
+        String sql = "SELECT * FROM brigada WHERE estado = 1";
+
+        ArrayList<String> brigadas = new ArrayList();
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+          
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                Brigada brigada = new Brigada();
+                brigada.setCodBrigada(rs.getInt("codBrigada"));
+//                brigada.setNombreBr(rs.getString("nombre_br"));
+//                brigada.setEspecialidad(rs.getString("especialidad"));
+                
+                brigadas.add(brigada.getCodBrigada()+"");
+  //  brigadas.add(brigada.getCodBrigada()+" "+brigada.getNombreBr()); // original
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada");
+        }
+
+        return brigadas;
+    }
 }

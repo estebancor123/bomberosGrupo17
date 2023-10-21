@@ -79,6 +79,7 @@ public class siniestroview2 extends javax.swing.JInternalFrame {
         jbAsignarB = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         setPreferredSize(new java.awt.Dimension(1000, 574));
 
         jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
@@ -108,6 +109,7 @@ public class siniestroview2 extends javax.swing.JInternalFrame {
         jLabel9.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel9.setText("codBrigada");
 
+        jtBrigada.setEditable(false);
         jtBrigada.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jtBrigada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -324,7 +326,7 @@ public class siniestroview2 extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
         );
 
         pack();
@@ -403,12 +405,21 @@ public class siniestroview2 extends javax.swing.JInternalFrame {
 
                 if (jtPuntos.getText().isEmpty()) {
 
-                    JOptionPane.showMessageDialog(this, " Si el siniestro se resolvio debe colocar una puntuación ");
+                    JOptionPane.showMessageDialog(this, " Solocar una puntuación al finalisar el Sinestro ");
                     return;
                 }
+             
                 int puntos = Integer.parseInt(jtPuntos.getText());
                 int coordX = Integer.parseInt(jtCoord_X.getText());
                 int coordY = Integer.parseInt(jtCoord_Y.getText());
+                if (!(coordX>0 && coordX<600)|| !(coordY>0 && coordY<600)) {
+                    JOptionPane.showMessageDialog(this, "fuera de rango, ingrese un valor de 0  a 600 ");
+                    return ;
+                }
+                if (!(puntos>=0 && puntos<=10)) {
+                    JOptionPane.showMessageDialog(this, "Coloque una nota de 0 a 10 ");
+                    return ;
+                }
                 
                 if (jcEspecialidad.getSelectedItem() == null || jdFecha.getDate() == null) {
                     JOptionPane.showMessageDialog(this, " * campos requeridos ");
