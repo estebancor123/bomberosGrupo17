@@ -44,7 +44,7 @@ public class BomberoData {
             ps.setDate(2, Date.valueOf(bombero.getFechaNac()));
             ps.setInt(3, bombero.getCodBrigada().getCodBrigada());
             ps.setInt(4, bombero.getDni());
-            ps.setInt(5,bombero.getCelular());
+            ps.setString(5,bombero.getCelular());
             ps.setBoolean(6, bombero.isEstado());
             ps.setString(7,bombero.getApellido());
             ps.setString(8,bombero.getGrupoSanguineo());
@@ -78,7 +78,7 @@ public class BomberoData {
             
             ps.setDate(2, Date.valueOf(bombero.getFechaNac()));
             ps.setInt(3, bombero.getCodBrigada().getCodBrigada());
-             ps.setInt(4, bombero.getCelular());
+             ps.setString(4, bombero.getCelular());
              ps.setBoolean(5, bombero.isEstado());
              ps.setString(6, bombero.getApellido());
              ps.setString(7, bombero.getGrupoSanguineo());
@@ -134,7 +134,7 @@ public class BomberoData {
               Brigada brigada=bd.buscarBrigada(rs.getInt("codBrigada"));
               bombero.setCodBrigada(brigada);
                
-                bombero.setCelular(rs.getInt("celular"));
+                bombero.setCelular(rs.getString("celular"));
                 bombero.setEstado(rs.getBoolean("estado"));
                 bombero.setApellido(rs.getString("apellido"));
                 bombero.setGrupoSanguineo(rs.getString("grupo_sanguineo"));
@@ -168,7 +168,7 @@ public class BomberoData {
                 bombero.setIdBombero(rs.getInt("id_bombrero"));
                 bombero.setNombre(rs.getString("nombre"));
                 bombero.setDni(rs.getInt("dni"));
-                bombero.setCelular(rs.getInt("celular"));
+                bombero.setCelular(rs.getString("celular"));
                 bombero.setFechaNac(rs.getDate("fecha_nac").toLocalDate());
 
                 Brigada brigada = bd.buscarBrigada(rs.getInt("codBrigada"));

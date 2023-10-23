@@ -19,6 +19,9 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -37,6 +40,7 @@ private String[] gruposanguineo = {"O-","O+","A+","A-","B+","B+","AB-","AB+"};
      */
     public bomberoview() {
         initComponents();
+        jlSugerencia.setVisible(false);
         transparenciaBotones();
         CargarGrupoSanguineo();
         cargarComboBrigadas ();
@@ -83,6 +87,7 @@ private String[] gruposanguineo = {"O-","O+","A+","A-","B+","B+","AB-","AB+"};
         jLabel10 = new javax.swing.JLabel();
         jcGruposanguineo = new javax.swing.JComboBox<>();
         jcBrigadas = new javax.swing.JComboBox<>();
+        jlSugerencia = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         setPreferredSize(new java.awt.Dimension(1000, 574));
@@ -122,6 +127,15 @@ private String[] gruposanguineo = {"O-","O+","A+","A-","B+","B+","AB-","AB+"};
         jLabel8.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel8.setText("Fecha de Nacimiento");
         jDesktopPane1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, -1, -1));
+
+        jtCelular.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jtCelularMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jtCelularMouseExited(evt);
+            }
+        });
         jDesktopPane1.add(jtCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, 160, -1));
 
         jrEstado.setBackground(new java.awt.Color(255, 255, 255));
@@ -189,6 +203,9 @@ private String[] gruposanguineo = {"O-","O+","A+","A-","B+","B+","AB-","AB+"};
 
         jDesktopPane1.add(jcBrigadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 310, 160, -1));
 
+        jlSugerencia.setText("(codigo de area y su n°)");
+        jDesktopPane1.add(jlSugerencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 210, 20));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -220,9 +237,33 @@ private String[] gruposanguineo = {"O-","O+","A+","A-","B+","B+","AB-","AB+"};
         String grupoS=jcGruposanguineo.getSelectedItem()+"";
         
         bri=brigadaData.buscarBrigada(Integer.parseInt(jcBrigadas.getSelectedItem()+""));
-        int celular = Integer.parseInt(jtCelular.getText());
-                     
-                     
+        String  celular = (jtCelular.getText());
+//                  if (!(celular.matches("[0-9]*") && celular.length()== 10 )){
+//                JOptionPane.showMessageDialog(this," El número no es valido  ");
+//                return ;
+//                }    
+
+                Matcher validar2 = validarTel.matcher(celular);
+                String patron = "\\+54 9 \\d{3} \\d{3} \\d{4}";
+                Pattern pattern = Pattern.compile(patron);
+
+              // Crear un objeto Matcher para buscar el patron en el texto
+               Matcher matcher = pattern.matcher(celular);
+                
+        
+                 if (validar2.matches()|| matcher.matches() ) {
+                
+                   celular  = validarTel.matcher(celular).replaceAll("+54 9 $2 $3 $4 ");
+                 
+                 }else{
+                 JOptionPane.showMessageDialog(this," El número no es valido  ");
+                 return ;
+                 }
+                    
+                      // celular  = validarTel.matcher(celular).replaceAll("+54 9 $2 $3$4 $5$6");
+                            
+                   
+                
                     if (!(doc >= 3000000 && doc <= 70000000)) {
                         JOptionPane.showMessageDialog(this, "Ingrese un numero  de 8 digitos");
                         return ;
@@ -320,6 +361,16 @@ private String[] gruposanguineo = {"O-","O+","A+","A-","B+","B+","AB-","AB+"};
 //        }
     }//GEN-LAST:event_jrEstadoActionPerformed
 
+    private void jtCelularMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCelularMouseEntered
+        // TODO add your handling code here:
+        jlSugerencia.setVisible(true);
+    }//GEN-LAST:event_jtCelularMouseEntered
+
+    private void jtCelularMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCelularMouseExited
+        // TODO add your handling code here:
+        jlSugerencia.setVisible(false);
+    }//GEN-LAST:event_jtCelularMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
@@ -340,6 +391,7 @@ private String[] gruposanguineo = {"O-","O+","A+","A-","B+","B+","AB-","AB+"};
     private javax.swing.JComboBox<String> jcBrigadas;
     private javax.swing.JComboBox<String> jcGruposanguineo;
     private com.toedter.calendar.JDateChooser jdFechaNac;
+    private javax.swing.JLabel jlSugerencia;
     private javax.swing.JRadioButton jrEstado;
     private javax.swing.JTextField jtApellido;
     private javax.swing.JTextField jtCelular;
@@ -414,5 +466,8 @@ public void setBrigada(String e){
    
     
 }
+    private static final Pattern validarTel = 
+      Pattern.compile("^(0054|\\+54)?(\\d\\d\\d)-? ?(\\d\\d\\d)-? ?(\\d\\d\\d\\d)$", Pattern.MULTILINE);
+//      Pattern.compile("^(0054|\\+54)?(\\d\\d\\d)-? ?(\\d\\d)-? ?(\\d)-? ?(\\d)-? ?(\\d\\d\\d)$", Pattern.MULTILINE);
 }
 

@@ -17,7 +17,7 @@ public class Bombero {
     private LocalDate fechaNac;
     private Brigada codBrigada;
     private int dni; 
-    private int celular;
+    private String celular;
     private boolean estado;
     private String apellido;
     private String grupoSanguineo;
@@ -25,7 +25,7 @@ public class Bombero {
     public Bombero() {
     }
 
-    public Bombero(int idBombero, String nombre, LocalDate fechaNac, Brigada codBrigada, int dni, int celular, boolean estado, String apellido, String grupoSanguineo) {
+    public Bombero(int idBombero, String nombre, LocalDate fechaNac, Brigada codBrigada, int dni, String celular, boolean estado, String apellido, String grupoSanguineo) {
         this.idBombero = idBombero;
         this.nombre = nombre;
         this.fechaNac = fechaNac;
@@ -37,7 +37,7 @@ public class Bombero {
         this.grupoSanguineo = grupoSanguineo;
     }
 
-    public Bombero(String nombre, LocalDate fechaNac, Brigada codBrigada, int dni, int celular, boolean estado, String apellido, String grupoSanguineo) {
+    public Bombero(String nombre, LocalDate fechaNac, Brigada codBrigada, int dni, String celular, boolean estado, String apellido, String grupoSanguineo) {
         this.nombre = nombre;
         this.fechaNac = fechaNac;
         this.codBrigada = codBrigada;
@@ -88,11 +88,11 @@ public class Bombero {
         this.dni = dni;
     }
 
-    public int getCelular() {
+    public String getCelular() {
         return celular;
     }
 
-    public void setCelular(int celular) {
+    public void setCelular(String celular) {
         this.celular = celular;
     }
 
@@ -124,11 +124,6 @@ public class Bombero {
     public String toString() {
         return "Bombero{" + "idBombero=" + idBombero + ", nombre=" + nombre + ", fechaNac=" + fechaNac + ", codBrigada=" + codBrigada + ", dni=" + dni + ", celular=" + celular + ", estado=" + estado + ", apellido=" + apellido + ", grupoSanguineo=" + grupoSanguineo + '}';
     }
-    
-    
-    
-    
-    
 
-    
+ 
 }
