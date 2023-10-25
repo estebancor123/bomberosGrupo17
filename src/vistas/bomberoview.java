@@ -139,8 +139,8 @@ private String[] gruposanguineo = {"O-","O+","A+","A-","B+","B+","AB-","AB+"};
         jDesktopPane1.add(jtCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, 160, -1));
 
         jrEstado.setBackground(new java.awt.Color(255, 255, 255));
-        jrEstado.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jrEstado.setText("Vacio = Inactivo");
+        jrEstado.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jrEstado.setText("Vacio = Activo");
         jrEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrEstadoActionPerformed(evt);

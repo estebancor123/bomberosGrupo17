@@ -187,7 +187,30 @@ public class BomberoData {
 
         
         return bomberos;
-    }   
+    } 
+      public ArrayList<String> listarBomberosPorBrigada(int codB) {
+
+        String sql = "SELECT * FROM bombero WHERE codBrigada = ? AND estado = 1";
+
+        ArrayList<String> bomberos = new ArrayList<>();
+        
+        try {
+             PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, codB);
+            ResultSet rs=ps.executeQuery();
+            while (rs.next()) {
+                Bombero bombero = new Bombero();
+                bombero.setNombre(rs.getString("nombre"));
+                bombero.setApellido(rs.getString("apellido"));
+                bomberos.add(bombero.getApellido()+"  "+bombero.getNombre()+"\n");
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero "+ex);
+        }
+        return bomberos;
+    } 
 }
 
 // private int idBombero;
