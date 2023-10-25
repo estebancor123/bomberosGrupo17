@@ -126,7 +126,7 @@ private String[] especial = {"incendios", "salvamento", "rescates en montaña", 
         });
 
         jrestado.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jrestado.setText("Vacio = Activo");
+        jrestado.setText("Vacio = inactivo");
 
         jrlibre.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jrlibre.setText("Vacio = Ocupado");
@@ -365,7 +365,8 @@ private String[] especial = {"incendios", "salvamento", "rescates en montaña", 
     private void jbListarBonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbListarBonActionPerformed
         // TODO add your handling code here:
        int cod =Integer.parseInt(jtcodbrigada.getText());//listarBomberosPorBrigada
-        JOptionPane.showMessageDialog(this,bdata.listarBomberosPorBrigada(cod));
+        JOptionPane.showMessageDialog(this,bdata.listarBomberosPorBrigada(cod),"    Bomberos de la Brigada",JOptionPane.PLAIN_MESSAGE,new ImageIcon("src/imagenes/logobomberolistado.jpg"));
+      
     }//GEN-LAST:event_jbListarBonActionPerformed
 
 

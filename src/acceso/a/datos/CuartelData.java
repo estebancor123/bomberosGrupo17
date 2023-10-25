@@ -37,7 +37,7 @@ public void guardarCuartel(Cuartel cuartel){
             ps.setString(2, cuartel.getDireccion());
             ps.setInt(3, cuartel.getCoorX());
             ps.setInt(4, cuartel.getCoorY());
-            ps.setInt(5,cuartel.getTelefono());
+            ps.setString(5,cuartel.getTelefono());
             ps.setString(6,cuartel.getCorreo());
             ps.executeUpdate();
 
@@ -72,7 +72,7 @@ public void guardarCuartel(Cuartel cuartel){
                 cuartel.setDireccion(rs.getString("direccion"));
                 cuartel.setCoorX(rs.getInt("coord_X"));
                 cuartel.setCoorY(rs.getInt("coord_Y"));
-                cuartel.setTelefono(rs.getInt("telefono"));
+                cuartel.setTelefono(rs.getString("telefono"));
                cuartel.setCorreo(rs.getString("correo"));
                cuartel.setEstado(rs.getBoolean("estado"));
             } else {
@@ -107,7 +107,7 @@ public ArrayList<Cuartel> listarcuartel() {
                 cuartel.setDireccion(rs.getString("direccion"));
                 cuartel.setCoorX(rs.getInt("coord_X"));
                 cuartel.setCoorY(rs.getInt("coord_Y"));
-                cuartel.setTelefono(rs.getInt("telefono"));
+                cuartel.setTelefono(rs.getString("telefono"));
                 cuartel.setCorreo(rs.getString("correo"));
                 cuartel.setEstado(true);
                
@@ -133,7 +133,7 @@ public ArrayList<Cuartel> listarcuartel() {
             ps.setString(2, cuartel.getDireccion());
             ps.setInt(3,cuartel.getCoorX());
             ps.setInt(4,cuartel.getCoorY());
-            ps.setInt(5, cuartel.getTelefono());
+            ps.setString(5, cuartel.getTelefono());
             ps.setString(6, cuartel.getCorreo());
             ps.setBoolean(7, cuartel.isEstado());
             ps.setInt(8,cuartel.getCodCuartel());

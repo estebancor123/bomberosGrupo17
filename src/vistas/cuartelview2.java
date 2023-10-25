@@ -5,10 +5,13 @@
  */
 package vistas;
 
+import acceso.a.datos.BrigadaData;
 import acceso.a.datos.CuartelData;
 import entidades.Cuartel;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -18,12 +21,14 @@ import javax.swing.JOptionPane;
  */
 public class cuartelview2 extends javax.swing.JInternalFrame {
 private CuartelData cdata=new CuartelData();
+private BrigadaData brigaData=new BrigadaData();
 private Cuartel cua=null;
     /**
      * Creates new form cuartelview2
      */
     public cuartelview2() {
         initComponents();
+        transparenciaBotones();
     }
 
     /**
@@ -63,6 +68,8 @@ private Cuartel cua=null;
         jbSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jbBuscar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jbListarBon = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         setPreferredSize(new java.awt.Dimension(1000, 574));
@@ -70,26 +77,26 @@ private Cuartel cua=null;
         jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
         jDesktopPane1.setPreferredSize(new java.awt.Dimension(1000, 574));
 
-        JL_correo.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        JL_correo.setText("correo");
+        JL_correo.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        JL_correo.setText("Correo del Cuartel ");
 
-        JL_telefono.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        JL_telefono.setText("telefono");
+        JL_telefono.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        JL_telefono.setText("Teléfono del Cuartel");
 
-        JL_coord_Y.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        JL_coord_Y.setText("coord_Y");
+        JL_coord_Y.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        JL_coord_Y.setText("Coordenada \"Y\"");
 
-        JL_coord_X.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        JL_coord_X.setText("coord_X");
+        JL_coord_X.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        JL_coord_X.setText("Coordenada \"X\"");
 
-        JL_direccion.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        JL_direccion.setText("direccion");
+        JL_direccion.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        JL_direccion.setText("Dirección del Cuartel");
 
-        JL_nombre_cuartel.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        JL_nombre_cuartel.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         JL_nombre_cuartel.setText("nombre_cuartel");
 
-        JL_cod_Cuartel.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        JL_cod_Cuartel.setText("cod_Cuartel");
+        JL_cod_Cuartel.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        JL_cod_Cuartel.setText("Buscar x CodCuartel");
 
         jtCodCuartel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -112,7 +119,7 @@ private Cuartel cua=null;
         jtCorreo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jrEstado.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
-        jrEstado.setText("Estado");
+        jrEstado.setText("¿En Funcionamiento? ");
 
         jbNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/mas112.png"))); // NOI18N
         jbNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -152,6 +159,15 @@ private Cuartel cua=null;
             }
         });
 
+        jLabel2.setText("Vacío = Cuartel Sin Actividad");
+
+        jbListarBon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/listarBom.jpg"))); // NOI18N
+        jbListarBon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbListarBonActionPerformed(evt);
+            }
+        });
+
         jDesktopPane1.setLayer(JL_correo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(JL_telefono, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(JL_coord_Y, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -173,6 +189,8 @@ private Cuartel cua=null;
         jDesktopPane1.setLayer(jbSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jbBuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jbListarBon, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -183,19 +201,40 @@ private Cuartel cua=null;
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGap(240, 240, 240)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(JL_cod_Cuartel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JL_nombre_cuartel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JL_direccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JL_coord_X, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JL_coord_Y, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JL_telefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JL_correo, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(55, 55, 55)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jrEstado)
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(JL_telefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(JL_nombre_cuartel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(JL_direccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(JL_coord_X, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(JL_coord_Y, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(JL_correo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                                .addGap(10, 10, 10)
+                                                .addComponent(jrEstado)))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(JL_cod_Cuartel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(26, 26, 26))
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addGap(96, 96, 96)
+                                .addComponent(jbNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(73, 73, 73)))
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(56, 56, 56)
+                                .addComponent(jbEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(54, 54, 54)
+                                .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jtCodCuartel)
@@ -205,18 +244,12 @@ private Cuartel cua=null;
                                     .addComponent(jtCoordY)
                                     .addComponent(jtTelefono)
                                     .addComponent(jtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(51, 51, 51)
-                                .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(173, 173, 173)
-                        .addComponent(jbNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58)
-                        .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63)
-                        .addComponent(jbEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)
-                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(471, Short.MAX_VALUE))
+                                .addGap(21, 21, 21)
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jbListarBon, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(30, 30, 30)))
+                .addGap(441, 441, 441))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,21 +284,28 @@ private Cuartel cua=null;
                         .addGap(18, 18, 18)
                         .addComponent(jtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jtCoordX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jtCoordX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(jbListarBon, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(25, 25, 25)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JL_correo)
                     .addComponent(jtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
-                .addComponent(jrEstado)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jbEliminar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(jrEstado)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jbEliminar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -303,29 +343,52 @@ private Cuartel cua=null;
         // guardar cuartel
           try{
                         
-        int doc=Integer.parseInt(jtCodCuartel.getText());
+       
         String nomb=jtNombreC.getText();
         String direc=jtDireccion.getText();
        int coordX = Integer.parseInt(jtCoordX.getText());
        int coordY = Integer.parseInt(jtCoordY.getText());
-       int tel = Integer.parseInt(jtTelefono.getText());
+      // int tel = Integer.parseInt(jtTelefono.getText());
        String correo=jtCorreo.getText();
        boolean est=jrEstado.isSelected();
+                String  celular = (jtTelefono.getText());
+//                  if (!(celular.matches("[0-9]*") && celular.length()== 10 )){
+//                JOptionPane.showMessageDialog(this," El número no es valido  ");
+//                return ;
+//                }    
+
+                Matcher validar2 = validarTel.matcher(celular);
+                String patron = "\\+54 9 \\d{3} \\d{3} \\d{4}";
+                Pattern pattern = Pattern.compile(patron);
+
+              // Crear un objeto Matcher para buscar el patron en el texto
+               Matcher matcher = pattern.matcher(celular);
+                
         
+                 if (validar2.matches()|| matcher.matches() ) {
+                
+                   celular  = validarTel.matcher(celular).replaceAll("+54 9 $2 $3 $4 ");
+                 
+                 }else{
+                 JOptionPane.showMessageDialog(this," El número no es valido  ");
+                 return ;
+                 }
+       
             if (nomb.isEmpty()|| direc.isEmpty() ) {
                 JOptionPane.showMessageDialog(this,"llene todos los campos");
                 return ;
             }
             if (cua==null) {
-                cua=new Cuartel(doc, nomb, direc, coordX,coordY,tel,correo,est);
+                cua=new Cuartel(nomb, direc, coordX,coordY,celular,correo,est);
                 cdata.guardarCuartel(cua);
             }else{
+                int doc=Integer.parseInt(jtCodCuartel.getText());
                 cua.setCodCuartel(doc);
                 cua.setDireccion(direc);
                 cua.setNombCuartel(nomb);
                 cua.setCoorX(coordX);
                 cua.setCoorY(coordY);
-                cua.setTelefono(tel);
+                cua.setTelefono(celular);
                 cua.setCorreo(correo);
                 cua.setEstado(est);
                 
@@ -376,6 +439,13 @@ private Cuartel cua=null;
         }
     }//GEN-LAST:event_jbBuscarActionPerformed
 
+    private void jbListarBonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbListarBonActionPerformed
+        // TODO add your handling code here:
+        int cod =Integer.parseInt(jtCodCuartel.getText());//listarBomberosPorBrigada
+        JOptionPane.showMessageDialog(this,brigaData.listarBrigadaPorCuartel(cod),"    Brigadas del Cuartel (Nombre Brigada + Especialidad)",JOptionPane.PLAIN_MESSAGE,new ImageIcon("src/imagenes/logoBrigadalis.jpg"));
+
+    }//GEN-LAST:event_jbListarBonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JL_cod_Cuartel;
@@ -387,9 +457,11 @@ private Cuartel cua=null;
     private javax.swing.JLabel JL_telefono;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbListarBon;
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
     private javax.swing.JRadioButton jrEstado;
@@ -412,4 +484,30 @@ public void limpiarCampos(){
     jrEstado.setSelected(false);
     cua=null;
 }
+public void transparenciaBotones(){
+    jbGuardar.setOpaque(false);
+    jbGuardar.setContentAreaFilled(false);
+    jbGuardar.setBorderPainted(false);
+    jbSalir.setOpaque(false);
+    jbSalir.setContentAreaFilled(false);
+    jbSalir.setBorderPainted(false);
+    jbNuevo.setOpaque(false);
+    jbNuevo.setContentAreaFilled(false);
+    jbNuevo.setBorderPainted(false);
+    jbEliminar.setOpaque(false);
+    jbEliminar.setContentAreaFilled(false);
+    jbEliminar.setBorderPainted(false);
+    jbBuscar.setOpaque(false);
+    jbBuscar.setContentAreaFilled(false);
+    jbBuscar.setBorderPainted(false);
+    jbSalir.setOpaque(false);
+    jbSalir.setContentAreaFilled(false);
+    jbSalir.setBorderPainted(false);
+    jbListarBon.setOpaque(false);
+    jbListarBon.setContentAreaFilled(false);
+    jbListarBon.setBorderPainted(false);
+    
+}
+ private static final Pattern validarTel = 
+      Pattern.compile("^(0054|\\+54)?(\\d\\d\\d)-? ?(\\d\\d\\d)-? ?(\\d\\d\\d\\d)$", Pattern.MULTILINE);
 }

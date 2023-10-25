@@ -15,13 +15,13 @@ public class Cuartel {
     private String direccion;
     private int coorX;
     private int coorY;
-    private int telefono;
+    private String telefono;
     private String correo;
     private boolean estado;
     public Cuartel() {
     }
 
-    public Cuartel(int codCuartel, String nombCuartel, String direccion, int coorX, int coorY, int telefono, String correo, boolean estado) {
+    public Cuartel(int codCuartel, String nombCuartel, String direccion, int coorX, int coorY, String telefono, String correo, boolean estado) {
         this.codCuartel = codCuartel;
         this.nombCuartel = nombCuartel;
         this.direccion = direccion;
@@ -32,7 +32,7 @@ public class Cuartel {
         this.estado = estado;
     }
 
-    public Cuartel(String nombCuartel, String direccion, int coorX, int coorY, int telefono, String correo, boolean estado) {
+    public Cuartel(String nombCuartel, String direccion, int coorX, int coorY, String telefono, String correo, boolean estado) {
         this.nombCuartel = nombCuartel;
         this.direccion = direccion;
         this.coorX = coorX;
@@ -82,11 +82,11 @@ public class Cuartel {
         this.coorY = coorY;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -106,6 +106,6 @@ public class Cuartel {
         this.estado = estado;
     }
 
-  
+   
     
 }

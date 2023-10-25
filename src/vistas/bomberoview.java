@@ -140,7 +140,7 @@ private String[] gruposanguineo = {"O-","O+","A+","A-","B+","B+","AB-","AB+"};
 
         jrEstado.setBackground(new java.awt.Color(255, 255, 255));
         jrEstado.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jrEstado.setText("Vacio = Activo");
+        jrEstado.setText("Vacio = Inactivo");
         jrEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrEstadoActionPerformed(evt);
@@ -272,7 +272,11 @@ private String[] gruposanguineo = {"O-","O+","A+","A-","B+","B+","AB-","AB+"};
                         JOptionPane.showMessageDialog(this, "Nombre y/o Apellido vacios");
                         return;
                     }
-                    if (bom == null) {
+                    if ((brigadaData.comprobarEspacio(bri.getCodBrigada())>=5)) {
+                        
+                        return ;
+                    }
+                    if ((bom == null) ) {
                         bom = new Bombero(nomb, fechaN, bri, doc, celular, est, ape, grupoS);
                         bData.guardarBombero(bom);
                         

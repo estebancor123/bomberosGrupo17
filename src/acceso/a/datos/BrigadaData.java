@@ -260,4 +260,63 @@ public Brigada buscarBrigada (int id){
 
         return brigadas;
     }
+        public int comprobarEspacio (int id){
+
+     String sql ="SELECT COUNT(`codBrigada`) FROM bombero WHERE codBrigada=?";
+
+        int contador=0;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                
+               contador = rs.getInt(1);
+                if (contador >= 5) {
+                    JOptionPane.showMessageDialog(null, "La brigada ya tiene 5 bomberos.");
+                   
+                }
+              
+
+            } 
+                ps.close();   
+                    
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada");
+        }
+    
+           return contador;
+}
+       public ArrayList<String> listarBrigadaPorCuartel (int id){
+//SELECT `NombreBr``Especialidad``Libre``NroCuartel` FROM `brigada` WHERE `CodBrigada`
+
+//    SELECT `codBrigada`, `nombre_br`, `especialidad`, `libre`, `nro_cuartel`, `estado` FROM `brigada` WHERE 1
+        String sql = "SELECT  nombre_br, especialidad FROM brigada WHERE  nro_cuartel = ?" ;
+        
+        
+        ArrayList<String> brig = new ArrayList();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs=ps.executeQuery();
+
+            while(rs.next()){
+                Brigada brigada=new Brigada();
+               
+               
+                brigada.setNombreBr(rs.getString("nombre_br"));
+                brigada.setEspecialidad(rs.getString("especialidad"));
+              
+               brig.add(brigada.getNombreBr()+" - "+brigada.getEspecialidad()+"\n");
+
+            }
+                ps.close();   
+                    
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada");
+        }
+    
+            return brig;
+
+}
 }
