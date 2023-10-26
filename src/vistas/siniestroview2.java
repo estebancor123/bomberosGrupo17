@@ -452,15 +452,15 @@ public class siniestroview2 extends javax.swing.JInternalFrame {
                 
                 if (jtPuntos.getText().isEmpty()) {
 
-                    JOptionPane.showMessageDialog(this, " Solocar una puntuación al finalisar el Sinestro ");
+                    JOptionPane.showMessageDialog(this, " Colocar una puntuación al finalizar el Sinestro ");
                     return;
                 }
-             
+               
                 int puntos = Integer.parseInt(jtPuntos.getText());
                 int coordX = Integer.parseInt(jtCoord_X.getText());
                 int coordY = Integer.parseInt(jtCoord_Y.getText());
-                if (!(coordX>0 && coordX<600)|| !(coordY>0 && coordY<600)) {
-                    JOptionPane.showMessageDialog(this, "fuera de rango, ingrese un valor de 0  a 600 ");
+                if (!(coordX>0 && coordX<800)|| !(coordY>0 && coordY<800)) {
+                    JOptionPane.showMessageDialog(this, "Coordenada fuera de rango, ingrese solo numeros enteros  de 0  a 800 ");
                     return ;
                 }
                 if (!(puntos>=0 && puntos<=10)) {
@@ -469,7 +469,7 @@ public class siniestroview2 extends javax.swing.JInternalFrame {
                 }
                
                 if (jcEspecialidad.getSelectedItem() == null || jdFecha.getDate() == null) {
-                    JOptionPane.showMessageDialog(this, " * campos requeridos ");
+                    JOptionPane.showMessageDialog(this, " Complete campos requeridos * ");
                     return;
                 }
                 LocalDate fechaN = jdFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -579,7 +579,7 @@ public class siniestroview2 extends javax.swing.JInternalFrame {
                         cuartel1=cua;
                         
                     }
-//                    System.out.println("Distance between the two points is : " + Distancia);
+//                    System.out.println(Distancia);
                     
                     
                 }
@@ -587,12 +587,15 @@ public class siniestroview2 extends javax.swing.JInternalFrame {
             }
 
         }
-        
+      double distancia= ((double)Math.round(Distancia * 100d) / 100d);
+     
+       JOptionPane.showMessageDialog(this,distancia + " metros ","      Distacia  entre el Cuartel y el Siniestro es: ",JOptionPane.PLAIN_MESSAGE,new ImageIcon("src/imagenes/distancia.jpg"));
         jtBrigada.setText(brigada1.getCodBrigada()+"");
     }//GEN-LAST:event_jbAsignarBActionPerformed
 
     private void jtBrigadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtBrigadaActionPerformed
         // TODO add your handling code here:
+      
     }//GEN-LAST:event_jtBrigadaActionPerformed
 
 
