@@ -349,7 +349,8 @@ private Cuartel cua=null;
        int coordX = Integer.parseInt(jtCoordX.getText());
        int coordY = Integer.parseInt(jtCoordY.getText());
       // int tel = Integer.parseInt(jtTelefono.getText());
-       String correo=jtCorreo.getText();
+     
+       
        boolean est=jrEstado.isSelected();
                 String  celular = (jtTelefono.getText());
 //                  if (!(celular.matches("[0-9]*") && celular.length()== 10 )){
@@ -370,10 +371,21 @@ private Cuartel cua=null;
                    celular  = validarTel.matcher(celular).replaceAll("+54 9 $2 $3 $4 ");
                  
                  }else{
-                 JOptionPane.showMessageDialog(this," El número no es valido  ");
+                 JOptionPane.showMessageDialog(this," El Telefono no es valido ingrese un numero 10 digitos  ");
                  return ;
                  }
-       
+               
+                 String correo=jtCorreo.getText();
+      
+                Matcher validar1 = verificarEmail.matcher(correo);
+               if (validar1.matches() ) {
+                
+                   correo  = verificarEmail.matcher(correo).replaceAll(correo);
+                 
+                 }else{
+                 JOptionPane.showMessageDialog(this," El correo no es valido  ");
+                 return ;
+                 }
             if (nomb.isEmpty()|| direc.isEmpty() ) {
                 JOptionPane.showMessageDialog(this,"llene todos los campos");
                 return ;
@@ -510,4 +522,10 @@ public void transparenciaBotones(){
 }
  private static final Pattern validarTel = 
       Pattern.compile("^(0054|\\+54)?(\\d\\d\\d)-? ?(\\d\\d\\d)-? ?(\\d\\d\\d\\d)$", Pattern.MULTILINE);
+
+ private static final Pattern verificarEmail = 
+         Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+
 }
+
