@@ -439,7 +439,7 @@ public class siniestroview2 extends javax.swing.JInternalFrame {
                 String detalle = jtDetalle.getText();
 
                 LocalDate fechaR = jdResol.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
+                
                 if (jtPuntos.getText().isEmpty()) {
 
                     JOptionPane.showMessageDialog(this, " Solocar una puntuación al finalisar el Sinestro ");
@@ -457,12 +457,16 @@ public class siniestroview2 extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Coloque una nota de 0 a 10 ");
                     return ;
                 }
-                
+               
                 if (jcEspecialidad.getSelectedItem() == null || jdFecha.getDate() == null) {
                     JOptionPane.showMessageDialog(this, " * campos requeridos ");
                     return;
                 }
                 LocalDate fechaN = jdFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                 if (fechaN.isAfter(fechaR)) {
+                    JOptionPane.showMessageDialog(this, "La fecha de Resolucion no puede ser anterior a la fecha del Siniestro ");
+                    return ;
+                }
                 String tipo = jcEspecialidad.getSelectedItem() + "";
                 if (sin == null) {
                     sin = new Siniestro(tipo, fechaN, coordX, coordY, detalle, fechaR, puntos, brigada);
