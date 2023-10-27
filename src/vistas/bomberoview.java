@@ -34,7 +34,7 @@ private BomberoData bData= new BomberoData();
 private Bombero bom=new Bombero();
 private BrigadaData brigadaData= new BrigadaData();
 private Brigada bri=null;
-private String[] gruposanguineo = {"O-","O+","A+","A-","B+","B+","AB-","AB+"};
+private String[] gruposanguineo = {"O-","O+","A+","A-","B-","B+","AB-","AB+"};
     /**
      * Creates new form bomberoview
      */
@@ -253,7 +253,7 @@ private String[] gruposanguineo = {"O-","O+","A+","A-","B+","B+","AB-","AB+"};
         
                  if (validar2.matches()|| matcher.matches() ) {
                 
-                   celular  = validarTel.matcher(celular).replaceAll("+54 9 $2 $3 $4 ");
+                   celular  = validarTel.matcher(celular).replaceAll("+54 9 $2 $3 $4");
                  
                  }else{
                  JOptionPane.showMessageDialog(this," El número no es valido  ");
@@ -272,11 +272,12 @@ private String[] gruposanguineo = {"O-","O+","A+","A-","B+","B+","AB-","AB+"};
                         JOptionPane.showMessageDialog(this, "Nombre y/o Apellido vacios");
                         return;
                     }
-                    if ((brigadaData.comprobarEspacio(bri.getCodBrigada())>=5)) {
+                   
+                    if ((bom == null) ) {
+                         if ((brigadaData.comprobarEspacio(bri.getCodBrigada())>=5)) {
                         
                         return ;
                     }
-                    if ((bom == null) ) {
                         bom = new Bombero(nomb, fechaN, bri, doc, celular, est, ape, grupoS);
                         bData.guardarBombero(bom);
                         

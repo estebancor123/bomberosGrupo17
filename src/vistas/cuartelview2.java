@@ -368,7 +368,7 @@ private Cuartel cua=null;
         
                  if (validar2.matches()|| matcher.matches() ) {
                 
-                   celular  = validarTel.matcher(celular).replaceAll("+54 9 $2 $3 $4 ");
+                   celular  = validarTel.matcher(celular).replaceAll("+54 9 $2 $3 $4");
                  
                  }else{
                  JOptionPane.showMessageDialog(this," El Telefono no es valido ingrese un numero 10 digitos  ");
