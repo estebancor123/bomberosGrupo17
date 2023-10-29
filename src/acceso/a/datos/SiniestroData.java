@@ -25,7 +25,7 @@ public class SiniestroData {
     }
 
 public void guardarSiniestro (Siniestro siniestro){
-   String sql = "INSERT INTO siniestro(tipo, fecha_siniestro, coord_X, coord_Y, detalle, fecha_resol, puntuacion, codBrigada) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+   String sql = "INSERT INTO siniestro(tipo, fecha_siniestro, coord_X, coord_Y, detalle, fecha_resol, puntuacion, codBrigada,estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
        
    try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -38,6 +38,7 @@ public void guardarSiniestro (Siniestro siniestro){
             ps.setDate(6,Date.valueOf(siniestro.getFechaResolucion()));
             ps.setInt(7,siniestro.getPuntuacion());
             ps.setInt(8,siniestro.getCodBrigada().getCodBrigada());
+            ps.setBoolean(9, true);
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
@@ -56,8 +57,8 @@ public void guardarSiniestro (Siniestro siniestro){
 }
    public void guardarSinResolver(Siniestro siniestro){
 
-    String sql="INSERT INTO siniestro (tipo,fecha_siniestro,coord_X, coord_Y, detalle,codBrigada)"
-                + "VALUES (?,?,?,?,?,?)";
+    String sql="INSERT INTO siniestro (tipo,fecha_siniestro,coord_X, coord_Y, detalle,codBrigada,estado)"
+                + "VALUES (?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             ps.setString(1,siniestro.getTipo());
@@ -68,6 +69,7 @@ public void guardarSiniestro (Siniestro siniestro){
 //            ps.setDate(6,Date.valueOf(siniestro.getFechaResol()));
 //            ps.setInt(7,siniestro.getPuntuacion());
             ps.setInt(6,siniestro.getCodBrigada().getCodBrigada());
+            ps.setBoolean(7, true);
             ps.executeUpdate();
             
             ResultSet rs=ps.getGeneratedKeys();
@@ -108,7 +110,7 @@ public ArrayList <Siniestro> ListarSiniestrosEntreFechas (){
    
     ArrayList<Siniestro> siniestro = new ArrayList<>();
     
-    String sql = "SELECT * FROM `siniestro` WHERE fecha_siniestro BETWEEN CURRENT_DATE -1 AND CURRENT_DATE";
+    String sql = "SELECT * FROM `siniestro` WHERE fecha_siniestro BETWEEN CURRENT_DATE -1 AND CURRENT_DATE AND estado=1";
            
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -145,7 +147,7 @@ public ArrayList <Siniestro> ListarSiniestrosEntreFechas (){
     public ArrayList<Siniestro> obtenerSiniestro (){
 
     ArrayList<Siniestro> siniestros= new ArrayList();
-    String sql="SELECT * FROM siniestro";
+    String sql="SELECT * FROM siniestro WHERE estado =1";
 
         try {
             PreparedStatement ps=con.prepareStatement(sql);
@@ -178,7 +180,7 @@ public ArrayList <Siniestro> ListarSiniestrosEntreFechas (){
 }
         public Siniestro buscarSiniestro(int codigo) {
 //`Codigo``tipo``FechaSiniestro``CoordX``CoordY``Detalles``FechaResol``Puntuacion``CodBrigada`
-        String sql = "SELECT codigo, tipo, fecha_siniestro, coord_X, coord_Y, detalle, fecha_resol, puntuacion, codBrigada FROM siniestro WHERE codigo = ?";
+        String sql = "SELECT codigo, tipo, fecha_siniestro, coord_X, coord_Y, detalle, fecha_resol, puntuacion, codBrigada FROM siniestro WHERE codigo = ? AND estado=1 ";
 
         Siniestro siniestro = null;
         try {
@@ -219,7 +221,7 @@ public ArrayList <Siniestro> ListarSiniestrosEntreFechas (){
        public ArrayList<Siniestro> cargarSiniestro (){
 
     ArrayList<Siniestro> siniestros= new ArrayList();
-    String sql="SELECT * FROM siniestro";
+    String sql="SELECT * FROM siniestro WHERE estado =1";
 
         try {
             PreparedStatement ps=con.prepareStatement(sql);
@@ -247,7 +249,7 @@ public ArrayList <Siniestro> ListarSiniestrosEntreFechas (){
          public void modificarSiniestro(Siniestro siniestro){
 //        
   //`codigo``tipo``fecha_siniestro``coord_X``coord_Y``detalle``fecha_resol``puntuacion``codBrigada`       
-    String sql="UPDATE siniestro SET tipo=?,fecha_siniestro=?, coord_X=?, coord_Y=?,detalle=?,fecha_resol=?,puntuacion=?,codBrigada=? WHERE codigo=?";
+    String sql="UPDATE siniestro SET tipo=?,fecha_siniestro=?, coord_X=?, coord_Y=?,detalle=?,fecha_resol=?,puntuacion=?,codBrigada=? WHERE codigo=? AND estado =1";
         try {
             
             PreparedStatement ps=con.prepareStatement(sql);
@@ -278,7 +280,7 @@ public void totalEntreAyerYHoy(){
   public ArrayList<String> cantidadDeSiniestros (){
 
     ArrayList<String> siniestros= new ArrayList();
-    String sql="SELECT * FROM siniestro";
+    String sql="SELECT * FROM siniestro WHERE estado =1";
 
         try {
             PreparedStatement ps=con.prepareStatement(sql);
@@ -300,6 +302,23 @@ public void totalEntreAyerYHoy(){
         }
        return siniestros;
 }
+        public void eliminarSiniestro (int id) {
+        String sql = "UPDATE siniestro  SET estado = 0 WHERE codigo = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, id);
+            int exito =ps.executeUpdate();
+            if(exito==1){
+            
+            JOptionPane.showMessageDialog(null, "siniestro eliminado");
+
+        }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla siniestro");
+        }
+    }
 }
 
 ///* public ArrayList <Siniestro> ListarSiniestrosEntreFechas (){

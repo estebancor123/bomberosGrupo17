@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-10-2023 a las 23:28:28
+-- Tiempo de generación: 29-10-2023 a las 02:38:27
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -141,23 +141,24 @@ CREATE TABLE `siniestro` (
   `detalle` text NOT NULL,
   `fecha_resol` date NOT NULL,
   `puntuacion` int(11) NOT NULL,
-  `codBrigada` int(11) NOT NULL
+  `codBrigada` int(11) NOT NULL,
+  `estado` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `siniestro`
 --
 
-INSERT INTO `siniestro` (`codigo`, `tipo`, `fecha_siniestro`, `coord_X`, `coord_Y`, `detalle`, `fecha_resol`, `puntuacion`, `codBrigada`) VALUES
-(1, 'incendios', '2023-10-20', 12, 15, 'se que el rancho', '2023-10-16', 8, 4),
-(2, 'incendios', '2023-10-16', 14, 12, 'incedio de casa 2 pisos', '2023-10-16', 6, 5),
-(4, 'rescates en montaña', '1980-04-20', 0, 0, 'se que el rancho', '2023-10-05', 9, 4),
-(5, 'rescates en montaña', '2023-10-18', 15, 12, 'en la altura', '0000-00-00', 0, 2),
-(6, 'incendios', '2023-10-16', 15, 32, 'fuego mucho', '0000-00-00', 0, 1),
-(7, 'incendios', '2023-10-16', 12, 12, 'incendio de casa', '0000-00-00', 0, 1),
-(8, 'accidentes de tráfico', '2023-10-20', 45, 582, 'asdasdbobo', '2023-10-19', 7, 8),
-(9, 'rescates en montaña', '2023-10-26', 454, 12, 'rescate2', '0000-00-00', 0, 2),
-(10, 'prevención', '2023-10-26', 14, 24, 'asd', '2023-10-27', 9, 9);
+INSERT INTO `siniestro` (`codigo`, `tipo`, `fecha_siniestro`, `coord_X`, `coord_Y`, `detalle`, `fecha_resol`, `puntuacion`, `codBrigada`, `estado`) VALUES
+(1, 'incendios', '2023-10-20', 12, 15, 'se que el rancho', '2023-10-16', 8, 4, 1),
+(2, 'incendios', '2023-10-16', 14, 12, 'incedio de casa 2 pisos', '2023-10-16', 6, 5, 1),
+(4, 'rescates en montaña', '1980-04-20', 0, 0, 'se que el rancho', '2023-10-05', 9, 4, 1),
+(5, 'rescates en montaña', '2023-10-18', 15, 12, 'en la altura', '0000-00-00', 0, 2, 1),
+(6, 'incendios', '2023-10-16', 15, 32, 'fuego mucho', '0000-00-00', 0, 1, 1),
+(7, 'incendios', '2023-10-16', 12, 12, 'incendio de casa', '0000-00-00', 0, 1, 1),
+(8, 'accidentes de tráfico', '2023-10-20', 45, 582, 'asdasdbobo', '2023-10-19', 7, 8, 1),
+(9, 'rescates en montaña', '2023-10-26', 454, 12, 'rescate2', '0000-00-00', 0, 2, 1),
+(10, 'prevención', '2023-10-26', 14, 24, 'asd', '2023-10-27', 9, 9, 0);
 
 --
 -- Índices para tablas volcadas

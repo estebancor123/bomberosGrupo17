@@ -282,6 +282,12 @@ private String[] gruposanguineo = {"O-","O+","A+","A-","B-","B+","AB-","AB+"};
                         bData.guardarBombero(bom);
                         
                     } else {
+                        if (bom.getCodBrigada().getCodBrigada()!= bri.getCodBrigada()) {
+                        if ((brigadaData.comprobarEspacio(bri.getCodBrigada())>=5)) {
+                        
+                        return ;
+                    }
+                        }
                         bom.setDni(doc);
                         bom.setApellido(ape);
                         bom.setNombre(nomb);

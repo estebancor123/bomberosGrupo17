@@ -21,22 +21,23 @@ public class Siniestro {
     private LocalDate fechaResolucion;
     private int puntuacion;
     private Brigada codBrigada;
-
+    private boolean estado;
     public Siniestro() {
     }
 
-    public Siniestro(String tipo, LocalDate fechaSiniestro, int coord_X, int coord_Y, String detalles, Brigada codBrigada) {
+    public Siniestro(String tipo, LocalDate fechaSiniestro, int coord_X, int coord_Y, String detalles, Brigada codBrigada,boolean estado) {
         this.tipo = tipo;
         this.fechaSiniestro = fechaSiniestro;
         this.coord_X = coord_X;
         this.coord_Y = coord_Y;
         this.detalles = detalles;
         this.codBrigada = codBrigada;
+        this.estado=estado;
     }
 
 
 
-    public Siniestro(int codigo, String tipo, LocalDate fechaSiniestro, int coordX, int coorY, String detalles, LocalDate fechaResolucion, int puntuacion, Brigada codBrigada) {
+    public Siniestro(int codigo, String tipo, LocalDate fechaSiniestro, int coordX, int coorY, String detalles, LocalDate fechaResolucion, int puntuacion, Brigada codBrigada,boolean estado) {
         this.codigo = codigo;
         this.tipo = tipo;
         this.fechaSiniestro = fechaSiniestro;
@@ -46,9 +47,10 @@ public class Siniestro {
         this.fechaResolucion = fechaResolucion;
         this.puntuacion = puntuacion;
         this.codBrigada = codBrigada;
+        this.estado=estado;
     }
 
-    public Siniestro(String tipo, LocalDate fechaSiniestro, int coordX, int coorY, String detalles, LocalDate fechaResolucion, int puntuacion, Brigada codBrigada) {
+    public Siniestro(String tipo, LocalDate fechaSiniestro, int coordX, int coorY, String detalles, LocalDate fechaResolucion, int puntuacion, Brigada codBrigada,boolean estado) {
         this.tipo = tipo;
         this.fechaSiniestro = fechaSiniestro;
         this.coord_X = coord_X;
@@ -57,6 +59,7 @@ public class Siniestro {
         this.fechaResolucion = fechaResolucion;
         this.puntuacion = puntuacion;
         this.codBrigada = codBrigada;
+        this.estado=estado;
     }
 
     public int getCodigo() {
@@ -131,9 +134,18 @@ public class Siniestro {
         this.codBrigada = codBrigada;
     }
 
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+    
+
     @Override
     public String toString() {
-        return "Siniestro{" + "codigo=" + codigo + ", tipo=" + tipo + ", fechaSiniestro=" + fechaSiniestro + ", coord_X=" + coord_X + ", coord_Y=" + coord_Y + ", detalles=" + detalles + ", fechaResolucion=" + fechaResolucion + ", puntuacion=" + puntuacion + ", codBrigada=" + codBrigada + '}';
+        return "Siniestro" + " Cod=" + codigo + "," + tipo;
     }
 
    

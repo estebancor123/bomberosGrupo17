@@ -72,14 +72,15 @@ private SiniestroData sd= new SiniestroData();
         };
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jmBomberos = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jmBrigadas = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jmCuarteles = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jmSiniestros = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -220,33 +221,62 @@ private SiniestroData sd= new SiniestroData();
 
         jMenu1.setText("Boberos");
 
-        jMenuItem1.setText("jMenuItem1");
-        jMenu1.add(jMenuItem1);
+        jmBomberos.setText("Bomberos");
+        jmBomberos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmBomberosActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmBomberos);
 
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Brigadas");
 
-        jMenuItem2.setText("jMenuItem2");
-        jMenu2.add(jMenuItem2);
+        jmBrigadas.setText("Brigadas");
+        jmBrigadas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmBrigadasActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmBrigadas);
 
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Cuarteles");
 
-        jMenuItem3.setText("jMenuItem3");
-        jMenu3.add(jMenuItem3);
+        jmCuarteles.setText("Cuarteles");
+        jmCuarteles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmCuartelesActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jmCuarteles);
 
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Siniestros");
 
-        jMenuItem4.setText("jMenuItem4");
-        jMenu4.add(jMenuItem4);
+        jmSiniestros.setText("Siniestros");
+        jmSiniestros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmSiniestrosActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jmSiniestros);
 
         jMenuBar1.add(jMenu4);
 
         jMenu5.setText("Salir");
+
+        jMenuItem1.setText("Seguro quiere salir?");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem1);
+
         jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
@@ -289,6 +319,51 @@ private SiniestroData sd= new SiniestroData();
         jDFormularios.add(bom);
         jDFormularios.moveToFront(bom);
     }//GEN-LAST:event_jbCuartelActionPerformed
+
+    private void jmBomberosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmBomberosActionPerformed
+        // TODO add your handling code here:
+           jDFormularios.removeAll();
+        jDFormularios.repaint();
+        bomberoview bom=new bomberoview();
+        bom.setVisible(true);
+        jDFormularios.add(bom);
+        jDFormularios.moveToFront(bom);
+    }//GEN-LAST:event_jmBomberosActionPerformed
+
+    private void jmBrigadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmBrigadasActionPerformed
+        // TODO add your handling code here:
+         jDFormularios.removeAll();
+        jDFormularios.repaint();
+        brigadaview bom=new brigadaview();
+        bom.setVisible(true);
+        jDFormularios.add(bom);
+        jDFormularios.moveToFront(bom);
+    }//GEN-LAST:event_jmBrigadasActionPerformed
+
+    private void jmCuartelesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCuartelesActionPerformed
+        // TODO add your handling code here:
+           jDFormularios.removeAll();
+        jDFormularios.repaint();
+        cuartelview2 bom=new cuartelview2();
+        bom.setVisible(true);
+        jDFormularios.add(bom);
+        jDFormularios.moveToFront(bom);
+    }//GEN-LAST:event_jmCuartelesActionPerformed
+
+    private void jmSiniestrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSiniestrosActionPerformed
+        // TODO add your handling code here:
+         jDFormularios.removeAll();
+        jDFormularios.repaint();
+        siniestroview2 bom=new siniestroview2();
+        bom.setVisible(true);
+        jDFormularios.add(bom);
+        jDFormularios.moveToFront(bom);
+    }//GEN-LAST:event_jmSiniestrosActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        System. exit(0);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -338,13 +413,14 @@ private SiniestroData sd= new SiniestroData();
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JButton jbBombero;
     private javax.swing.JButton jbBrigada;
     private javax.swing.JButton jbCuartel;
     private javax.swing.JButton jbSiniestro;
+    private javax.swing.JMenuItem jmBomberos;
+    private javax.swing.JMenuItem jmBrigadas;
+    private javax.swing.JMenuItem jmCuarteles;
+    private javax.swing.JMenuItem jmSiniestros;
     private javax.swing.JTextField jtSinAyHoy;
     private javax.swing.JTextField jtTotalSin;
     // End of variables declaration//GEN-END:variables

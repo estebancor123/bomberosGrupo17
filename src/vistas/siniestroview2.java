@@ -155,6 +155,11 @@ public class siniestroview2 extends javax.swing.JInternalFrame {
         jbEliminar.setBackground(new java.awt.Color(102, 102, 255));
         jbEliminar.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jbEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar12321.png"))); // NOI18N
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salir777777777.png"))); // NOI18N
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -443,7 +448,10 @@ public class siniestroview2 extends javax.swing.JInternalFrame {
 
             if (jdResol.getDate() != null && jtBrigada.getText() != null) {
                 int nbrigada = Integer.parseInt(jtBrigada.getText());
-
+                if (nbrigada==0) {
+                      JOptionPane.showMessageDialog(this, "No se encuentra una Brigada disponible para asignar" );
+                      return ;
+                }
                 brigada = brigadas.buscarBrigada(nbrigada);
 
                 String detalle = jtDetalle.getText();
@@ -479,7 +487,11 @@ public class siniestroview2 extends javax.swing.JInternalFrame {
                 }
                 String tipo = jcEspecialidad.getSelectedItem() + "";
                 if (sin == null) {
-                    sin = new Siniestro(tipo, fechaN, coordX, coordY, detalle, fechaR, puntos, brigada);
+                    if (brigada.getCodBrigada()==0) {
+                        JOptionPane.showMessageDialog(this, "No puede grabar una Brigada 0 ");
+                        return ;
+                    }
+                    sin = new Siniestro(tipo, fechaN, coordX, coordY, detalle, fechaR, puntos, brigada,true);
                     sinData.guardarSiniestro(sin);
                     brigada.setLibre(true);
 
@@ -520,7 +532,7 @@ public class siniestroview2 extends javax.swing.JInternalFrame {
                 int coordY = Integer.parseInt(jtCoord_Y.getText());
                 if (sin == null) {
 
-                    sin = new Siniestro(tipo, fechaN, coordX, coordY, detalle, brigada);
+                    sin = new Siniestro(tipo, fechaN, coordX, coordY, detalle, brigada,true);
                     sinData.guardarSinResolver(sin);
 
                 } else {
@@ -590,13 +602,39 @@ public class siniestroview2 extends javax.swing.JInternalFrame {
       double distancia= ((double)Math.round(Distancia * 100d) / 100d);
      
        JOptionPane.showMessageDialog(this,distancia + " metros ","      Distacia  entre el Cuartel y el Siniestro es: ",JOptionPane.PLAIN_MESSAGE,new ImageIcon("src/imagenes/distancia.jpg"));
-        jtBrigada.setText(brigada1.getCodBrigada()+"");
+        if (brigada1.getCodBrigada()==0) {
+             jtBrigada.setText("1");
+             
+        }else
+       jtBrigada.setText(brigada1.getCodBrigada()+"");
+       
     }//GEN-LAST:event_jbAsignarBActionPerformed
 
     private void jtBrigadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtBrigadaActionPerformed
         // TODO add your handling code here:
       
     }//GEN-LAST:event_jtBrigadaActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        // TODO add your handling code here:
+        try{
+
+
+                if (sin!=null) {
+
+            sinData.eliminarSiniestro(sin.getCodigo());
+
+
+                }else{
+                    JOptionPane.showMessageDialog(this, "Siniestro no encontrado");
+                }
+
+
+        }catch (NumberFormatException nf){
+            JOptionPane.showMessageDialog(this, "error al intentar eliminar el siniestro ");
+        }
+    
+    }//GEN-LAST:event_jbEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
